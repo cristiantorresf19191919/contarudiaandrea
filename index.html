@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea La Torre | Contadora Pública - Auditoría y Control</title>
+    <meta name="description" content="Andrea La Torre - Contadora Pública, Especialista en Auditoría y Control, Oficial de cumplimiento SAGRILAFT. Servicios contables, tributarios y de cumplimiento en Colombia.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/gojs/release/go.js"></script>
+    <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --red: #C41E2A;
+            --red-dark: #A01722;
+            --burgundy: #4A0E1B;
+            --charcoal: #2D2D2D;
+            --dark: #1A1A1A;
+            --gray-light: #F5F5F5;
+            --gray: #E0E0E0;
+            --gray-mid: #999;
+            --white: #FFFFFF;
+            --green-whatsapp: #25D366;
+            --green-whatsapp-dark: #128C7E;
+            --shadow: 0 4px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background: var(--white);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+            padding: 10px 0;
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--white);
+            transition: var(--transition);
+        }
+        .navbar.scrolled .nav-logo { color: var(--charcoal); }
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-mark svg { width: 48px; height: 48px; }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--white);
+            transition: var(--transition);
+            position: relative;
+        }
+        .navbar.scrolled .nav-links a { color: var(--charcoal); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.15);
+            border-radius: 30px;
+            padding: 4px;
+            gap: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+        .navbar.scrolled .lang-toggle {
+            background: var(--gray-light);
+            border-color: var(--gray);
+        }
+        .lang-btn {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 26px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 1px;
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+        }
+        .navbar.scrolled .lang-btn { color: var(--gray-mid); }
+        .lang-btn.active {
+            background: var(--red);
+            color: var(--white) !important;
+            box-shadow: 0 2px 10px rgba(196,30,42,0.3);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 2.5px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+        .navbar.scrolled .hamburger span { background: var(--charcoal); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--charcoal) 50%, var(--dark) 100%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(196,30,42,0.08) 50%, transparent 60%);
+            transform: rotate(-15deg);
+            animation: heroShine 8s ease-in-out infinite;
+        }
+        @keyframes heroShine {
+            0%, 100% { opacity: 0.5; transform: rotate(-15deg) translateX(0); }
+            50% { opacity: 1; transform: rotate(-15deg) translateX(5%); }
+        }
+        /* Geometric decorations */
+        .hero-geo {
+            position: absolute;
+            pointer-events: none;
+        }
+        .hero-geo-1 {
+            top: 10%;
+            right: 5%;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(196,30,42,0.15);
+            transform: rotate(45deg);
+            animation: geoFloat 12s ease-in-out infinite;
+        }
+        .hero-geo-2 {
+            bottom: 10%;
+            right: 15%;
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transform: rotate(30deg);
+            animation: geoFloat 10s ease-in-out infinite reverse;
+        }
+        .hero-geo-3 {
+            top: 30%;
+            left: -5%;
+            width: 150px;
+            height: 150px;
+            background: rgba(196,30,42,0.05);
+            transform: rotate(60deg);
+            animation: geoFloat 14s ease-in-out infinite;
+        }
+        @keyframes geoFloat {
+            0%, 100% { transform: rotate(45deg) translate(0,0); }
+            33% { transform: rotate(47deg) translate(10px, -15px); }
+            66% { transform: rotate(43deg) translate(-10px, 10px); }
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding-top: 80px;
+        }
+        .hero-content { color: var(--white); }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(196,30,42,0.15);
+            border: 1px solid rgba(196,30,42,0.3);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 28px;
+        }
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--red);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        .hero h1 .highlight {
+            color: var(--red);
+            position: relative;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .hero-credentials {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 36px;
+            padding-left: 16px;
+            border-left: 3px solid var(--red);
+        }
+        .hero-credentials span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.65);
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        .btn-primary {
+            background: var(--red);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(196,30,42,0.3);
+        }
+        .btn-primary:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(196,30,42,0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-2px);
+        }
+        /* Hero visual / Logo display */
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-logo-wrapper {
+            width: 420px;
+            height: 420px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-logo-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(196,30,42,0.15);
+            animation: ringPulse 4s ease-in-out infinite;
+        }
+        .hero-logo-ring:nth-child(1) { width: 100%; height: 100%; animation-delay: 0s; }
+        .hero-logo-ring:nth-child(2) { width: 85%; height: 85%; animation-delay: 0.5s; }
+        .hero-logo-ring:nth-child(3) { width: 70%; height: 70%; animation-delay: 1s; border-color: rgba(196,30,42,0.25); }
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .hero-logo-center {
+            position: relative;
+            z-index: 2;
+            width: 220px;
+            height: 220px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero-logo-center svg { width: 120px; height: 120px; }
+
+        /* ========== STATS BAR ========== */
+        .stats-bar {
+            background: var(--white);
+            padding: 40px 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+        .stats-bar .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 32px 20px;
+            border-radius: var(--radius);
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--red);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--gray-mid);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========== SECTION STYLES ========== */
+        .section {
+            padding: 100px 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--gray-mid);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* ========== SERVICES ========== */
+        .services { background: var(--gray-light); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--red);
+            transition: height 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(196,30,42,0.1);
+        }
+        .service-card:hover::before { height: 100%; }
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(196,30,42,0.08), rgba(196,30,42,0.03));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--red);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .service-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--charcoal);
+        }
+        .service-card p {
+            font-size: 0.9rem;
+            color: var(--gray-mid);
+            line-height: 1.7;
+        }
+        .service-card .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--red);
+            transition: var(--transition);
+        }
+        .service-card .service-link:hover { gap: 12px; }
+
+        /* ========== FLOW DIAGRAM ========== */
+        .flow-section { background: var(--white); }
+        #flowDiagram {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            background: var(--gray-light);
+            border: 1px solid var(--gray);
+        }
+
+        /* ========== ABOUT ========== */
+        .about { background: var(--white); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .about-image {
+            position: relative;
+        }
+        .about-image-card {
+            background: linear-gradient(135deg, var(--burgundy), var(--charcoal));
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-image-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(196,30,42,0.1), transparent);
+            transform: rotate(45deg);
+        }
+        .about-image-card svg { width: 140px; height: 140px; margin: 0 auto 24px; position: relative; z-index: 2; }
+        .about-image-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+        .about-image-card p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            position: relative;
+            z-index: 2;
+        }
+        .about-experience {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--red);
+            color: var(--white);
+            padding: 20px 28px;
+            border-radius: var(--radius);
+            box-shadow: 0 8px 30px rgba(196,30,42,0.3);
+            z-index: 3;
+        }
+        .about-experience .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .about-experience .label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--charcoal);
+        }
+        .about-content p {
+            color: var(--gray-mid);
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        .about-list {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .about-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+        }
+        .about-list li svg {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+        }
+
+        /* ========== WHY CHOOSE ========== */
+        .why-section { background: var(--gray-light); }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .why-card {
+            text-align: center;
+            padding: 48px 32px;
+            background: var(--white);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        .why-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .why-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 25px rgba(196,30,42,0.2);
+        }
+        .why-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--white);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .why-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--charcoal);
+        }
+        .why-card p {
+            font-size: 0.88rem;
+            color: var(--gray-mid);
+        }
+
+        /* ========== CTA ========== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--burgundy), var(--charcoal));
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(196,30,42,0.08), transparent);
+            transform: rotate(30deg);
+        }
+        .cta-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+        }
+        .cta-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 16px;
+        }
+        .cta-content p {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            margin-bottom: 36px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== CONTACT ========== */
+        .contact { background: var(--white); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--charcoal);
+        }
+        .contact-info p {
+            color: var(--gray-mid);
+            margin-bottom: 32px;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(196,30,42,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .contact-item-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--red);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .contact-item-text .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-mid);
+        }
+        .contact-item-text .value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--charcoal);
+        }
+        .contact-form-wrapper {
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            padding: 40px;
+        }
+        .contact-form-wrapper h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--charcoal);
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray);
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            background: var(--white);
+            color: var(--charcoal);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(196,30,42,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-submit:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(196,30,42,0.3);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.5);
+            padding: 60px 0 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        .footer-brand .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .footer-brand .footer-logo svg { width: 40px; height: 40px; }
+        .footer-brand p {
+            font-size: 0.88rem;
+            line-height: 1.8;
+        }
+        .footer h4 {
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .footer-links a {
+            font-size: 0.88rem;
+            transition: var(--transition);
+        }
+        .footer-links a:hover { color: var(--red); padding-left: 4px; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* ========== WHATSAPP BUTTON ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .whatsapp-tooltip {
+            background: var(--white);
+            color: var(--charcoal);
+            padding: 10px 18px;
+            border-radius: 12px 0 0 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: var(--transition);
+            pointer-events: none;
+        }
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .whatsapp-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--green-whatsapp);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 25px rgba(37,211,102,0.4);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            animation: whatsappBounce 3s ease-in-out infinite;
+        }
+        .whatsapp-btn:hover {
+            background: var(--green-whatsapp-dark);
+            transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(37,211,102,0.5);
+        }
+        .whatsapp-btn svg {
+            width: 34px;
+            height: 34px;
+            fill: var(--white);
+        }
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--green-whatsapp);
+            opacity: 0;
+            animation: whatsappPing 2s ease-out infinite;
+        }
+        @keyframes whatsappPing {
+            0% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+        @keyframes whatsappBounce {
+            0%, 100% { transform: translateY(0); }
+            15% { transform: translateY(-8px); }
+            30% { transform: translateY(0); }
+            45% { transform: translateY(-4px); }
+            60% { transform: translateY(0); }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .hero .container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-visual { order: -1; }
+            .hero-logo-wrapper { width: 300px; height: 300px; }
+            .hero-logo-center { width: 160px; height: 160px; }
+            .hero-logo-center svg { width: 80px; height: 80px; }
+            .hero-credentials { border-left: none; padding-left: 0; border-top: 3px solid var(--red); padding-top: 16px; align-items: center; }
+            .hero-buttons { justify-content: center; }
+            .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(26,26,26,0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 28px;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { color: var(--white) !important; font-size: 1.1rem; }
+            .lang-toggle { margin-top: 20px; }
+            .hamburger { display: flex; }
+            .services-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .stats-bar .container { grid-template-columns: 1fr 1fr; }
+            .section { padding: 70px 0; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            #flowDiagram { height: 380px; }
+        }
+        @media (max-width: 480px) {
+            .stats-bar .container { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .contact-form-wrapper { padding: 24px; }
+            .whatsapp-btn { width: 56px; height: 56px; }
+            .whatsapp-btn svg { width: 28px; height: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <a href="#" class="nav-logo">
+            <div class="logo-mark">
+                <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <text x="5" y="48" font-family="Playfair Display, serif" font-size="48" font-weight="700">
+                        <tspan fill="#C41E2A">A</tspan><tspan fill="currentColor" dx="-12">L</tspan>
+                    </text>
+                </svg>
+            </div>
+            Andrea La Torre
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="#services" data-i18n="nav_services">Servicios</a>
+            <a href="#flow" data-i18n="nav_process">Proceso</a>
+            <a href="#about" data-i18n="nav_about">Nosotros</a>
+            <a href="#contact" data-i18n="nav_contact">Contacto</a>
+            <div class="lang-toggle">
+                <button class="lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            </div>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="hero">
+    <div class="hero-geo hero-geo-1"></div>
+    <div class="hero-geo hero-geo-2"></div>
+    <div class="hero-geo hero-geo-3"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge" data-i18n="hero_badge">Contadora Publica Certificada</div>
+            <h1><span class="highlight">Andrea</span><br>La Torre</h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">Soluciones contables, tributarias y de cumplimiento que impulsan la confianza y transparencia de su negocio.</p>
+            <div class="hero-credentials">
+                <span data-i18n="hero_cred1">Contadora Publica</span>
+                <span data-i18n="hero_cred2">Especialista en Auditoria y Control</span>
+                <span data-i18n="hero_cred3">Oficial de Cumplimiento - SAGRILAFT</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary" data-i18n="hero_cta1">Explorar Servicios</a>
+                <a href="#contact" class="btn btn-outline" data-i18n="hero_cta2">Contactar</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-logo-wrapper">
+                <div class="hero-logo-ring"></div>
+                <div class="hero-logo-ring"></div>
+                <div class="hero-logo-ring"></div>
+                <div class="hero-logo-center">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <text x="5" y="48" font-family="Playfair Display, serif" font-size="48" font-weight="700">
+                            <tspan fill="#C41E2A">A</tspan><tspan fill="#FFFFFF" dx="-12">L</tspan>
+                        </text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== STATS ==================== -->
+<div class="stats-bar reveal">
+    <div class="container">
+        <div class="stat-card">
+            <div class="stat-number" data-count="15">0</div>
+            <div class="stat-label" data-i18n="stat1_label">Anos de Experiencia</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-count="500">0</div>
+            <div class="stat-label" data-i18n="stat2_label">Clientes Atendidos</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-count="100">0</div>
+            <div class="stat-label" data-i18n="stat3_label">Auditorias Realizadas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-count="6">0</div>
+            <div class="stat-label" data-i18n="stat4_label">Servicios Especializados</div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SERVICES ==================== -->
+<section class="section services" id="services">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-tag" data-i18n="services_tag">Nuestros Servicios</div>
+            <h2 class="section-title" data-i18n="services_title">Soluciones Integrales para su Empresa</h2>
+            <p class="section-desc" data-i18n="services_desc">Servicios profesionales disenados para mantener su negocio en cumplimiento, optimizado y en crecimiento constante.</p>
+        </div>
+        <div class="services-grid">
+            <!-- Service 1: Contabilidad -->
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M4 2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z"/><path d="M8 6h8M8 10h8M8 14h5"/></svg>
+                </div>
+                <h3 data-i18n="svc1_title">Contabilidad</h3>
+                <p data-i18n="svc1_desc">Gestion contable integral, registros precisos y estados financieros que le permiten tomar decisiones informadas para el crecimiento de su empresa.</p>
+                <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <!-- Service 2: Auditoria -->
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+                </div>
+                <h3 data-i18n="svc2_title">Auditoria</h3>
+                <p data-i18n="svc2_desc">Auditorias exhaustivas que garantizan la transparencia financiera, identifican riesgos y aseguran el cumplimiento de normativas vigentes.</p>
+                <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <!-- Service 3: Impuestos -->
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+                </div>
+                <h3 data-i18n="svc3_title">Impuestos</h3>
+                <p data-i18n="svc3_desc">Planificacion y optimizacion tributaria estrategica, asegurando el cumplimiento fiscal y maximizando los beneficios legales para su empresa.</p>
+                <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <!-- Service 4: Declaracion de Renta -->
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><path d="M9 15l2 2 4-4"/></svg>
+                </div>
+                <h3 data-i18n="svc4_title">Declaracion de Renta</h3>
+                <p data-i18n="svc4_desc">Elaboracion y presentacion de declaraciones de renta para personas naturales, optimizando deducciones y asegurando cumplimiento total ante la DIAN.</p>
+                <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <!-- Service 5: SAGRILAFT -->
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <h3 data-i18n="svc5_title">SAGRILAFT / PADM</h3>
+                <p data-i18n="svc5_desc">Implementacion y gestion del sistema para la prevencion de lavado de activos, financiacion del terrorismo y financiamiento de la proliferacion de armas de destruccion masiva.</p>
+                <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+            <!-- Service 6: Etica y Transparencia -->
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3 data-i18n="svc6_title">Etica y Transparencia Empresarial</h3>
+                <p data-i18n="svc6_desc">Diseno e implementacion de programas de etica y transparencia empresarial que fortalecen la gobernanza corporativa y la reputacion de su organizacion.</p>
+                <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FLOW DIAGRAM ==================== -->
+<section class="section flow-section" id="flow">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-tag" data-i18n="flow_tag">Nuestro Proceso</div>
+            <h2 class="section-title" data-i18n="flow_title">Como Trabajamos</h2>
+            <p class="section-desc" data-i18n="flow_desc">Un proceso estructurado y transparente para garantizar resultados excepcionales en cada servicio.</p>
+        </div>
+        <div class="reveal">
+            <div id="flowDiagram"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="section about" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image reveal-left">
+                <div class="about-image-card">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <text x="5" y="48" font-family="Playfair Display, serif" font-size="48" font-weight="700">
+                            <tspan fill="#C41E2A">A</tspan><tspan fill="#FFFFFF" dx="-12">L</tspan>
+                        </text>
+                    </svg>
+                    <h3>Andrea La Torre</h3>
+                    <p data-i18n="about_card_subtitle">Contadora Publica | Auditora | Oficial SAGRILAFT</p>
+                </div>
+                <div class="about-experience">
+                    <div class="number">15+</div>
+                    <div class="label" data-i18n="about_exp_label">Anos</div>
+                </div>
+            </div>
+            <div class="about-content reveal-right">
+                <div class="section-tag" data-i18n="about_tag">Sobre Nosotros</div>
+                <h3 data-i18n="about_title">Experiencia y Compromiso al Servicio de su Empresa</h3>
+                <p data-i18n="about_p1">Con mas de 15 anos de experiencia en contaduria publica, auditoria y cumplimiento normativo, Andrea La Torre ofrece un servicio personalizado y de alta calidad.</p>
+                <p data-i18n="about_p2">Especializada en el cumplimiento de regulaciones colombianas, incluyendo SAGRILAFT y programas de transparencia, garantizamos que su empresa opere con los mas altos estandares.</p>
+                <ul class="about-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#C41E2A" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span data-i18n="about_li1">Contadora Publica titulada con especializacion en Auditoria y Control</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#C41E2A" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span data-i18n="about_li2">Oficial de Cumplimiento SAGRILAFT certificada</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#C41E2A" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span data-i18n="about_li3">Experta en normatividad tributaria colombiana</span>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#C41E2A" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span data-i18n="about_li4">Compromiso con la etica y transparencia empresarial</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== WHY CHOOSE ==================== -->
+<section class="section why-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-tag" data-i18n="why_tag">Por Que Elegirnos</div>
+            <h2 class="section-title" data-i18n="why_title">La Diferencia Andrea La Torre</h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <div class="why-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 data-i18n="why1_title">Confidencialidad Total</h3>
+                <p data-i18n="why1_desc">Su informacion financiera esta protegida con los mas altos estandares de seguridad y confidencialidad profesional.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 data-i18n="why2_title">Respuesta Oportuna</h3>
+                <p data-i18n="why2_desc">Cumplimos con los plazos establecidos y mantenemos comunicacion constante sobre el avance de cada proceso.</p>
+            </div>
+            <div class="why-card reveal">
+                <div class="why-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <h3 data-i18n="why3_title">Atencion Personalizada</h3>
+                <p data-i18n="why3_desc">Cada cliente recibe un servicio adaptado a sus necesidades especificas, con asesoria directa y profesional.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content reveal">
+            <h2 data-i18n="cta_title">Lleve su Empresa al Siguiente Nivel</h2>
+            <p data-i18n="cta_desc">Agende una consulta gratuita y descubra como podemos fortalecer las finanzas y el cumplimiento de su empresa.</p>
+            <a href="https://wa.me/573022851810?text=Hola%20Andrea%2C%20estoy%20interesado(a)%20en%20sus%20servicios%20profesionales%20de%20contadur%C3%ADa%20y%20auditor%C3%ADa.%20%C2%BFPodr%C3%ADamos%20agendar%20una%20consulta%3F" target="_blank" class="btn btn-primary" style="background: var(--green-whatsapp); box-shadow: 0 4px 20px rgba(37,211,102,0.3);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span data-i18n="cta_btn">Escribir por WhatsApp</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="section contact" id="contact">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="section-tag" data-i18n="contact_tag">Contacto</div>
+            <h2 class="section-title" data-i18n="contact_title">Hablemos de su Proyecto</h2>
+            <p class="section-desc" data-i18n="contact_desc">Estamos listos para ayudarle. Comuniquese con nosotros por el medio que prefiera.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info reveal-left">
+                <h3 data-i18n="contact_info_title">Informacion de Contacto</h3>
+                <p data-i18n="contact_info_desc">No dude en comunicarse. Responderemos a su consulta lo antes posible.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                        </div>
+                        <div class="contact-item-text">
+                            <div class="label" data-i18n="contact_phone_label">Telefono</div>
+                            <div class="value">+57 302 285 1810</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div class="contact-item-text">
+                            <div class="label" data-i18n="contact_email_label">Email</div>
+                            <div class="value">andrealato30@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div class="contact-item-text">
+                            <div class="label" data-i18n="contact_location_label">Ubicacion</div>
+                            <div class="value" data-i18n="contact_location_value">Colombia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-wrapper reveal-right">
+                <h4 data-i18n="form_title">Enviar Mensaje via WhatsApp</h4>
+                <form id="contactForm" onsubmit="sendWhatsApp(event)">
+                    <div class="form-group">
+                        <label data-i18n="form_name">Nombre</label>
+                        <input type="text" id="formName" required placeholder="Su nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="form_service">Servicio de Interes</label>
+                        <select id="formService" required>
+                            <option value="" data-i18n="form_select_placeholder">Seleccione un servicio</option>
+                            <option value="Contabilidad" data-i18n="form_opt1">Contabilidad</option>
+                            <option value="Auditoría" data-i18n="form_opt2">Auditoria</option>
+                            <option value="Impuestos" data-i18n="form_opt3">Impuestos</option>
+                            <option value="Declaración de Renta" data-i18n="form_opt4">Declaracion de Renta</option>
+                            <option value="SAGRILAFT" data-i18n="form_opt5">SAGRILAFT / PADM</option>
+                            <option value="Ética y Transparencia" data-i18n="form_opt6">Etica y Transparencia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="form_message">Mensaje</label>
+                        <textarea id="formMessage" rows="4" placeholder="Describa brevemente su necesidad..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" data-i18n="form_submit">Enviar por WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <text x="5" y="48" font-family="Playfair Display, serif" font-size="48" font-weight="700">
+                            <tspan fill="#C41E2A">A</tspan><tspan fill="#FFFFFF" dx="-12">L</tspan>
+                        </text>
+                    </svg>
+                    Andrea La Torre
+                </div>
+                <p data-i18n="footer_desc">Contadora Publica especializada en auditoria, cumplimiento normativo y transparencia empresarial. Comprometida con la excelencia y la confianza de nuestros clientes.</p>
+            </div>
+            <div>
+                <h4 data-i18n="footer_services">Servicios</h4>
+                <div class="footer-links">
+                    <a href="#services" data-i18n="svc1_title">Contabilidad</a>
+                    <a href="#services" data-i18n="svc2_title">Auditoria</a>
+                    <a href="#services" data-i18n="svc3_title">Impuestos</a>
+                    <a href="#services" data-i18n="svc4_title">Declaracion de Renta</a>
+                    <a href="#services" data-i18n="svc5_title">SAGRILAFT / PADM</a>
+                </div>
+            </div>
+            <div>
+                <h4 data-i18n="footer_contact">Contacto</h4>
+                <div class="footer-links">
+                    <a href="tel:+573022851810">+57 302 285 1810</a>
+                    <a href="mailto:andrealato30@gmail.com">andrealato30@gmail.com</a>
+                    <a href="https://wa.me/573022851810" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Andrea La Torre. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== WHATSAPP FLOATING BUTTON ==================== -->
+<a href="https://wa.me/573022851810?text=Hola%20Andrea%2C%20estoy%20interesado(a)%20en%20sus%20servicios%20profesionales%20de%20contadur%C3%ADa%20y%20auditor%C3%ADa.%20%C2%BFPodr%C3%ADamos%20agendar%20una%20consulta%3F" target="_blank" class="whatsapp-float" id="whatsappFloat">
+    <div class="whatsapp-tooltip" data-i18n="wa_tooltip">Chatea con nosotros</div>
+    <div class="whatsapp-btn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+</a>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// ========== TRANSLATIONS ==========
+const translations = {
+    es: {
+        nav_services: "Servicios",
+        nav_process: "Proceso",
+        nav_about: "Nosotros",
+        nav_contact: "Contacto",
+        hero_badge: "Contadora P\u00fablica Certificada",
+        hero_subtitle: "Soluciones contables, tributarias y de cumplimiento que impulsan la confianza y transparencia de su negocio.",
+        hero_cred1: "Contadora P\u00fablica",
+        hero_cred2: "Especialista en Auditor\u00eda y Control",
+        hero_cred3: "Oficial de Cumplimiento - SAGRILAFT",
+        hero_cta1: "Explorar Servicios",
+        hero_cta2: "Contactar",
+        stat1_label: "A\u00f1os de Experiencia",
+        stat2_label: "Clientes Atendidos",
+        stat3_label: "Auditor\u00edas Realizadas",
+        stat4_label: "Servicios Especializados",
+        services_tag: "Nuestros Servicios",
+        services_title: "Soluciones Integrales para su Empresa",
+        services_desc: "Servicios profesionales dise\u00f1ados para mantener su negocio en cumplimiento, optimizado y en crecimiento constante.",
+        svc1_title: "Contabilidad",
+        svc1_desc: "Gesti\u00f3n contable integral, registros precisos y estados financieros que le permiten tomar decisiones informadas para el crecimiento de su empresa.",
+        svc2_title: "Auditor\u00eda",
+        svc2_desc: "Auditor\u00edas exhaustivas que garantizan la transparencia financiera, identifican riesgos y aseguran el cumplimiento de normativas vigentes.",
+        svc3_title: "Impuestos",
+        svc3_desc: "Planificaci\u00f3n y optimizaci\u00f3n tributaria estrat\u00e9gica, asegurando el cumplimiento fiscal y maximizando los beneficios legales para su empresa.",
+        svc4_title: "Declaraci\u00f3n de Renta",
+        svc4_desc: "Elaboraci\u00f3n y presentaci\u00f3n de declaraciones de renta para personas naturales, optimizando deducciones y asegurando cumplimiento total ante la DIAN.",
+        svc5_title: "SAGRILAFT / PADM",
+        svc5_desc: "Implementaci\u00f3n y gesti\u00f3n del sistema para la prevenci\u00f3n de lavado de activos, financiaci\u00f3n del terrorismo y financiamiento de la proliferaci\u00f3n de armas de destrucci\u00f3n masiva.",
+        svc6_title: "\u00c9tica y Transparencia Empresarial",
+        svc6_desc: "Dise\u00f1o e implementaci\u00f3n de programas de \u00e9tica y transparencia empresarial que fortalecen la gobernanza corporativa y la reputaci\u00f3n de su organizaci\u00f3n.",
+        svc_link: "Consultar",
+        flow_tag: "Nuestro Proceso",
+        flow_title: "C\u00f3mo Trabajamos",
+        flow_desc: "Un proceso estructurado y transparente para garantizar resultados excepcionales en cada servicio.",
+        about_tag: "Sobre Nosotros",
+        about_title: "Experiencia y Compromiso al Servicio de su Empresa",
+        about_card_subtitle: "Contadora P\u00fablica | Auditora | Oficial SAGRILAFT",
+        about_exp_label: "A\u00f1os",
+        about_p1: "Con m\u00e1s de 15 a\u00f1os de experiencia en contadur\u00eda p\u00fablica, auditor\u00eda y cumplimiento normativo, Andrea La Torre ofrece un servicio personalizado y de alta calidad.",
+        about_p2: "Especializada en el cumplimiento de regulaciones colombianas, incluyendo SAGRILAFT y programas de transparencia, garantizamos que su empresa opere con los m\u00e1s altos est\u00e1ndares.",
+        about_li1: "Contadora P\u00fablica titulada con especializaci\u00f3n en Auditor\u00eda y Control",
+        about_li2: "Oficial de Cumplimiento SAGRILAFT certificada",
+        about_li3: "Experta en normatividad tributaria colombiana",
+        about_li4: "Compromiso con la \u00e9tica y transparencia empresarial",
+        why_tag: "Por Qu\u00e9 Elegirnos",
+        why_title: "La Diferencia Andrea La Torre",
+        why1_title: "Confidencialidad Total",
+        why1_desc: "Su informaci\u00f3n financiera est\u00e1 protegida con los m\u00e1s altos est\u00e1ndares de seguridad y confidencialidad profesional.",
+        why2_title: "Respuesta Oportuna",
+        why2_desc: "Cumplimos con los plazos establecidos y mantenemos comunicaci\u00f3n constante sobre el avance de cada proceso.",
+        why3_title: "Atenci\u00f3n Personalizada",
+        why3_desc: "Cada cliente recibe un servicio adaptado a sus necesidades espec\u00edficas, con asesor\u00eda directa y profesional.",
+        cta_title: "Lleve su Empresa al Siguiente Nivel",
+        cta_desc: "Agende una consulta gratuita y descubra c\u00f3mo podemos fortalecer las finanzas y el cumplimiento de su empresa.",
+        cta_btn: "Escribir por WhatsApp",
+        contact_tag: "Contacto",
+        contact_title: "Hablemos de su Proyecto",
+        contact_desc: "Estamos listos para ayudarle. Comun\u00edquese con nosotros por el medio que prefiera.",
+        contact_info_title: "Informaci\u00f3n de Contacto",
+        contact_info_desc: "No dude en comunicarse. Responderemos a su consulta lo antes posible.",
+        contact_phone_label: "Tel\u00e9fono",
+        contact_email_label: "Email",
+        contact_location_label: "Ubicaci\u00f3n",
+        contact_location_value: "Colombia",
+        form_title: "Enviar Mensaje v\u00eda WhatsApp",
+        form_name: "Nombre",
+        form_service: "Servicio de Inter\u00e9s",
+        form_select_placeholder: "Seleccione un servicio",
+        form_opt1: "Contabilidad",
+        form_opt2: "Auditor\u00eda",
+        form_opt3: "Impuestos",
+        form_opt4: "Declaraci\u00f3n de Renta",
+        form_opt5: "SAGRILAFT / PADM",
+        form_opt6: "\u00c9tica y Transparencia",
+        form_message: "Mensaje",
+        form_submit: "Enviar por WhatsApp",
+        footer_desc: "Contadora P\u00fablica especializada en auditor\u00eda, cumplimiento normativo y transparencia empresarial. Comprometida con la excelencia y la confianza de nuestros clientes.",
+        footer_services: "Servicios",
+        footer_contact: "Contacto",
+        footer_rights: "Todos los derechos reservados.",
+        wa_tooltip: "Chatea con nosotros",
+        // GoJS flow labels
+        flow_step1: "Consulta\nInicial",
+        flow_step2: "Diagn\u00f3stico",
+        flow_step3: "Propuesta\nPersonalizada",
+        flow_step4: "Ejecuci\u00f3n",
+        flow_step5: "Seguimiento\nContinuo",
+        flow_step6: "Resultados",
+    },
+    en: {
+        nav_services: "Services",
+        nav_process: "Process",
+        nav_about: "About",
+        nav_contact: "Contact",
+        hero_badge: "Certified Public Accountant",
+        hero_subtitle: "Accounting, tax, and compliance solutions that build trust and transparency for your business.",
+        hero_cred1: "Certified Public Accountant",
+        hero_cred2: "Audit & Control Specialist",
+        hero_cred3: "Compliance Officer - SAGRILAFT",
+        hero_cta1: "Explore Services",
+        hero_cta2: "Get in Touch",
+        stat1_label: "Years of Experience",
+        stat2_label: "Clients Served",
+        stat3_label: "Audits Completed",
+        stat4_label: "Specialized Services",
+        services_tag: "Our Services",
+        services_title: "Comprehensive Solutions for Your Business",
+        services_desc: "Professional services designed to keep your business compliant, optimized, and constantly growing.",
+        svc1_title: "Accounting",
+        svc1_desc: "Comprehensive accounting management, precise records, and financial statements that empower informed decisions for your company\u2019s growth.",
+        svc2_title: "Auditing",
+        svc2_desc: "Thorough audits ensuring financial transparency, identifying risks, and guaranteeing compliance with current regulations.",
+        svc3_title: "Tax Services",
+        svc3_desc: "Strategic tax planning and optimization, ensuring fiscal compliance while maximizing legal benefits for your business.",
+        svc4_title: "Income Tax Filing",
+        svc4_desc: "Preparation and filing of personal income tax returns, optimizing deductions and ensuring full compliance with DIAN regulations.",
+        svc5_title: "AML / CFT Compliance",
+        svc5_desc: "Implementation and management of systems for the prevention of money laundering, terrorism financing, and proliferation of weapons of mass destruction financing.",
+        svc6_title: "Corporate Ethics & Transparency",
+        svc6_desc: "Design and implementation of corporate ethics and transparency programs that strengthen governance and your organization\u2019s reputation.",
+        svc_link: "Learn More",
+        flow_tag: "Our Process",
+        flow_title: "How We Work",
+        flow_desc: "A structured and transparent process to guarantee exceptional results in every service.",
+        about_tag: "About Us",
+        about_title: "Experience and Commitment at Your Service",
+        about_card_subtitle: "Public Accountant | Auditor | SAGRILAFT Officer",
+        about_exp_label: "Years",
+        about_p1: "With over 15 years of experience in public accounting, auditing, and regulatory compliance, Andrea La Torre offers a personalized, high-quality service.",
+        about_p2: "Specialized in Colombian regulatory compliance, including SAGRILAFT and transparency programs, we ensure your company operates at the highest standards.",
+        about_li1: "Certified Public Accountant with specialization in Audit & Control",
+        about_li2: "Certified SAGRILAFT Compliance Officer",
+        about_li3: "Expert in Colombian tax regulations",
+        about_li4: "Committed to corporate ethics and transparency",
+        why_tag: "Why Choose Us",
+        why_title: "The Andrea La Torre Difference",
+        why1_title: "Total Confidentiality",
+        why1_desc: "Your financial information is protected with the highest standards of security and professional confidentiality.",
+        why2_title: "Timely Response",
+        why2_desc: "We meet established deadlines and maintain constant communication about the progress of each process.",
+        why3_title: "Personalized Attention",
+        why3_desc: "Each client receives a service tailored to their specific needs, with direct and professional guidance.",
+        cta_title: "Take Your Business to the Next Level",
+        cta_desc: "Schedule a free consultation and discover how we can strengthen your company\u2019s finances and compliance.",
+        cta_btn: "Message on WhatsApp",
+        contact_tag: "Contact",
+        contact_title: "Let\u2019s Talk About Your Project",
+        contact_desc: "We\u2019re ready to help. Reach out through your preferred channel.",
+        contact_info_title: "Contact Information",
+        contact_info_desc: "Don\u2019t hesitate to reach out. We\u2019ll respond to your inquiry as soon as possible.",
+        contact_phone_label: "Phone",
+        contact_email_label: "Email",
+        contact_location_label: "Location",
+        contact_location_value: "Colombia",
+        form_title: "Send Message via WhatsApp",
+        form_name: "Name",
+        form_service: "Service of Interest",
+        form_select_placeholder: "Select a service",
+        form_opt1: "Accounting",
+        form_opt2: "Auditing",
+        form_opt3: "Tax Services",
+        form_opt4: "Income Tax Filing",
+        form_opt5: "AML / CFT Compliance",
+        form_opt6: "Corporate Ethics & Transparency",
+        form_message: "Message",
+        form_submit: "Send via WhatsApp",
+        footer_desc: "Certified Public Accountant specialized in auditing, regulatory compliance, and corporate transparency. Committed to excellence and client trust.",
+        footer_services: "Services",
+        footer_contact: "Contact",
+        footer_rights: "All rights reserved.",
+        wa_tooltip: "Chat with us",
+        flow_step1: "Initial\nConsultation",
+        flow_step2: "Diagnosis",
+        flow_step3: "Custom\nProposal",
+        flow_step4: "Execution",
+        flow_step5: "Ongoing\nMonitoring",
+        flow_step6: "Results",
+    }
+};
+
+let currentLang = 'es';
+
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.setAttribute('data-lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    // Update all translatable elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translations[lang][key];
+            } else {
+                el.textContent = translations[lang][key];
+            }
+        }
+    });
+    // Update WhatsApp links
+    const waMsg = lang === 'es'
+        ? 'Hola Andrea, estoy interesado(a) en sus servicios profesionales de contaduría y auditoría. ¿Podríamos agendar una consulta?'
+        : 'Hello Andrea, I am interested in your professional accounting and auditing services. Could we schedule a consultation?';
+    const waUrl = `https://wa.me/573022851810?text=${encodeURIComponent(waMsg)}`;
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a => a.href = waUrl);
+    // Rebuild flow diagram
+    initFlowDiagram();
+}
+
+// ========== NAVBAR SCROLL ==========
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ========== MOBILE MENU ==========
+function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+    navLinks.classList.toggle('open');
+    hamburger.classList.toggle('active');
+}
+// Close menu on link click
+document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('active');
+    });
+});
+
+// ========== SCROLL REVEAL ==========
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+    revealObserver.observe(el);
+});
+
+// ========== COUNTER ANIMATION ==========
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.count);
+            let current = 0;
+            const increment = target / 60;
+            const suffix = target >= 100 ? '+' : '+';
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = Math.floor(current) + '+';
+            }, 25);
+            counterObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number[data-count]').forEach(el => counterObserver.observe(el));
+
+// ========== GOJS FLOW DIAGRAM ==========
+function initFlowDiagram() {
+    const div = document.getElementById('flowDiagram');
+    div.innerHTML = '';
+    const t = translations[currentLang];
+    const $ = go.GraphObject.make;
+
+    const diagram = $(go.Diagram, 'flowDiagram', {
+        'undoManager.isEnabled': false,
+        layout: $(go.TreeLayout, {
+            angle: 0,
+            layerSpacing: 80,
+            nodeSpacing: 30,
+        }),
+        isReadOnly: true,
+        'animationManager.isEnabled': true,
+        padding: 40,
+        initialAutoScale: go.AutoScale.Uniform,
+    });
+
+    diagram.nodeTemplate = $(go.Node, 'Auto',
+        { cursor: 'pointer' },
+        new go.AnimationTrigger('position'),
+        $(go.Shape, 'RoundedRectangle', {
+            strokeWidth: 0,
+            fill: '#C41E2A',
+            parameter1: 14,
+        },
+        new go.Binding('fill', 'color')),
+        $(go.Panel, 'Vertical',
+            { margin: new go.Margin(16, 24, 16, 24) },
+            $(go.Panel, 'Auto',
+                { margin: new go.Margin(0, 0, 8, 0) },
+                $(go.Shape, 'Circle', {
+                    width: 40, height: 40,
+                    fill: 'rgba(255,255,255,0.2)',
+                    strokeWidth: 0,
+                }),
+                $(go.TextBlock, {
+                    font: 'bold 16px Montserrat',
+                    stroke: '#FFFFFF',
+                },
+                new go.Binding('text', 'step'))
+            ),
+            $(go.TextBlock, {
+                font: '600 13px Montserrat',
+                stroke: '#FFFFFF',
+                textAlign: 'center',
+                wrap: go.Wrap.Fit,
+                maxSize: new go.Size(120, NaN),
+            },
+            new go.Binding('text', 'label'))
+        )
+    );
+
+    diagram.linkTemplate = $(go.Link,
+        { routing: go.Routing.AvoidsNodes, corner: 10 },
+        $(go.Shape, { strokeWidth: 2.5, stroke: '#C41E2A' }),
+        $(go.Shape, { toArrow: 'Triangle', fill: '#C41E2A', stroke: null, scale: 1.2 })
+    );
+
+    const nodeData = [
+        { key: 1, step: '1', label: t.flow_step1, color: '#C41E2A' },
+        { key: 2, step: '2', label: t.flow_step2, color: '#A01722' },
+        { key: 3, step: '3', label: t.flow_step3, color: '#4A0E1B' },
+        { key: 4, step: '4', label: t.flow_step4, color: '#2D2D2D' },
+        { key: 5, step: '5', label: t.flow_step5, color: '#A01722' },
+        { key: 6, step: '6', label: t.flow_step6, color: '#C41E2A' },
+    ];
+
+    const linkData = [
+        { from: 1, to: 2 },
+        { from: 2, to: 3 },
+        { from: 3, to: 4 },
+        { from: 4, to: 5 },
+        { from: 5, to: 6 },
+    ];
+
+    diagram.model = new go.GraphLinksModel(nodeData, linkData);
+}
+
+// ========== WHATSAPP FORM ==========
+function sendWhatsApp(e) {
+    e.preventDefault();
+    const name = document.getElementById('formName').value;
+    const service = document.getElementById('formService').value;
+    const message = document.getElementById('formMessage').value;
+
+    let waText;
+    if (currentLang === 'es') {
+        waText = `Hola Andrea, soy ${name}. Estoy interesado(a) en el servicio de *${service}*.`;
+        if (message) waText += `\n\nDetalle: ${message}`;
+        waText += '\n\n¿Podríamos agendar una consulta?';
+    } else {
+        waText = `Hello Andrea, my name is ${name}. I am interested in the *${service}* service.`;
+        if (message) waText += `\n\nDetails: ${message}`;
+        waText += '\n\nCould we schedule a consultation?';
+    }
+
+    window.open(`https://wa.me/573022851810?text=${encodeURIComponent(waText)}`, '_blank');
+}
+
+// ========== SMOOTH SCROLL ==========
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+    initFlowDiagram();
+});
+</script>
+</body>
+</html>
