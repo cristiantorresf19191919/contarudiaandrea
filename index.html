@@ -44,33 +44,269 @@
         ul { list-style: none; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        /* ========== SCROLL ANIMATIONS ========== */
-        .reveal {
+        /* ========== SCROLL ANIMATIONS - STAGGERING CASCADE ========== */
+        .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            will-change: transform, opacity, filter;
+        }
+        .reveal {
+            transform: translateY(60px) scale(0.97);
+            filter: blur(4px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+            filter: blur(0);
         }
         .reveal-left {
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateX(-80px) rotate(-2deg);
+            filter: blur(3px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal-left.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0) rotate(0deg);
+            filter: blur(0);
         }
         .reveal-right {
-            opacity: 0;
-            transform: translateX(60px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateX(80px) rotate(2deg);
+            filter: blur(3px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal-right.visible {
             opacity: 1;
+            transform: translateX(0) rotate(0deg);
+            filter: blur(0);
+        }
+        .reveal-scale {
+            transform: scale(0.8);
+            filter: blur(6px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0);
+        }
+
+        /* Cascade stagger delays for children */
+        [data-cascade] > * {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            filter: blur(3px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-cascade].cascading > *:nth-child(1) { transition-delay: 0.05s; }
+        [data-cascade].cascading > *:nth-child(2) { transition-delay: 0.13s; }
+        [data-cascade].cascading > *:nth-child(3) { transition-delay: 0.21s; }
+        [data-cascade].cascading > *:nth-child(4) { transition-delay: 0.29s; }
+        [data-cascade].cascading > *:nth-child(5) { transition-delay: 0.37s; }
+        [data-cascade].cascading > *:nth-child(6) { transition-delay: 0.45s; }
+        [data-cascade].cascading > * {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* Hero entrance animations */
+        .hero-content > * {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: heroEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-content > *:nth-child(1) { animation-delay: 0.2s; }
+        .hero-content > *:nth-child(2) { animation-delay: 0.4s; }
+        .hero-content > *:nth-child(3) { animation-delay: 0.6s; }
+        .hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+        .hero-content > *:nth-child(5) { animation-delay: 1.0s; }
+        @keyframes heroEntrance {
+            0% { opacity: 0; transform: translateY(40px) scale(0.97); filter: blur(4px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        .hero-visual {
+            opacity: 0;
+            animation: heroVisualEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        }
+        @keyframes heroVisualEntrance {
+            0% { opacity: 0; transform: scale(0.7) rotate(-5deg); filter: blur(10px); }
+            60% { opacity: 1; transform: scale(1.03) rotate(1deg); filter: blur(0); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+        }
+
+        /* Section header text shimmer reveal */
+        .section-header .section-tag {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .section-header .section-title {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+        }
+        .section-header .section-desc {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+        }
+        .section-header.visible .section-tag,
+        .section-header.visible .section-title,
+        .section-header.visible .section-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Title underline grow animation */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 60px;
+            height: 3px;
+            background: var(--red);
+            border-radius: 2px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+        }
+        .section-header.visible .section-title::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Service icon bounce on reveal */
+        .service-card.visible .service-icon,
+        [data-cascade].cascading .service-card .service-icon {
+            animation: iconBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes iconBounce {
+            0% { transform: scale(0) rotate(-20deg); }
+            60% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Why card icon spin on reveal */
+        .why-card.visible .why-icon,
+        [data-cascade].cascading .why-card .why-icon {
+            animation: iconSpin 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes iconSpin {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* Stat card flip-up */
+        .stat-card {
+            opacity: 0;
+            transform: perspective(600px) rotateX(15deg) translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .stats-bar.visible .stat-card:nth-child(1) { transition-delay: 0.1s; }
+        .stats-bar.visible .stat-card:nth-child(2) { transition-delay: 0.22s; }
+        .stats-bar.visible .stat-card:nth-child(3) { transition-delay: 0.34s; }
+        .stats-bar.visible .stat-card:nth-child(4) { transition-delay: 0.46s; }
+        .stats-bar.visible .stat-card {
+            opacity: 1;
+            transform: perspective(600px) rotateX(0deg) translateY(0);
+        }
+
+        /* Contact items cascade */
+        .contact-details .contact-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .contact-info.visible .contact-item:nth-child(1) { transition-delay: 0.2s; }
+        .contact-info.visible .contact-item:nth-child(2) { transition-delay: 0.35s; }
+        .contact-info.visible .contact-item:nth-child(3) { transition-delay: 0.5s; }
+        .contact-info.visible .contact-item {
+            opacity: 1;
             transform: translateX(0);
+        }
+
+        /* About list items cascade */
+        .about-list li {
+            opacity: 0;
+            transform: translateX(-25px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .about-content.visible .about-list li:nth-child(1) { transition-delay: 0.3s; }
+        .about-content.visible .about-list li:nth-child(2) { transition-delay: 0.42s; }
+        .about-content.visible .about-list li:nth-child(3) { transition-delay: 0.54s; }
+        .about-content.visible .about-list li:nth-child(4) { transition-delay: 0.66s; }
+        .about-content.visible .about-list li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Form groups cascade */
+        .contact-form-wrapper .form-group,
+        .contact-form-wrapper h4,
+        .contact-form-wrapper .btn-submit {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .contact-form-wrapper.visible h4 { transition-delay: 0.1s; }
+        .contact-form-wrapper.visible .form-group:nth-child(2) { transition-delay: 0.2s; }
+        .contact-form-wrapper.visible .form-group:nth-child(3) { transition-delay: 0.3s; }
+        .contact-form-wrapper.visible .form-group:nth-child(4) { transition-delay: 0.4s; }
+        .contact-form-wrapper.visible .btn-submit { transition-delay: 0.5s; }
+        .contact-form-wrapper.visible .form-group,
+        .contact-form-wrapper.visible h4,
+        .contact-form-wrapper.visible .btn-submit {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer cascade */
+        .footer-grid > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .footer.visible .footer-grid > *:nth-child(1) { transition-delay: 0.1s; }
+        .footer.visible .footer-grid > *:nth-child(2) { transition-delay: 0.25s; }
+        .footer.visible .footer-grid > *:nth-child(3) { transition-delay: 0.4s; }
+        .footer.visible .footer-grid > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CTA content pop */
+        .cta-content.visible {
+            animation: ctaPop 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes ctaPop {
+            0% { opacity: 0; transform: scale(0.9) translateY(40px); filter: blur(6px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        /* Parallax-lite scroll effect on geo shapes */
+        .hero-geo { transition: transform 0.1s linear; }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         /* ========== NAVBAR ========== */
@@ -234,7 +470,8 @@
             height: 300px;
             border: 1px solid rgba(196,30,42,0.15);
             transform: rotate(45deg);
-            animation: geoFloat 12s ease-in-out infinite;
+            opacity: 0;
+            animation: geoEnter 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
         }
         .hero-geo-2 {
             bottom: 10%;
@@ -243,7 +480,8 @@
             height: 200px;
             border: 1px solid rgba(255,255,255,0.05);
             transform: rotate(30deg);
-            animation: geoFloat 10s ease-in-out infinite reverse;
+            opacity: 0;
+            animation: geoEnter 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
         }
         .hero-geo-3 {
             top: 30%;
@@ -252,12 +490,12 @@
             height: 150px;
             background: rgba(196,30,42,0.05);
             transform: rotate(60deg);
-            animation: geoFloat 14s ease-in-out infinite;
+            opacity: 0;
+            animation: geoEnter 1.5s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
         }
-        @keyframes geoFloat {
-            0%, 100% { transform: rotate(45deg) translate(0,0); }
-            33% { transform: rotate(47deg) translate(10px, -15px); }
-            66% { transform: rotate(43deg) translate(-10px, 10px); }
+        @keyframes geoEnter {
+            0% { opacity: 0; transform: rotate(45deg) scale(0.3); }
+            100% { opacity: 1; transform: rotate(45deg) scale(1); }
         }
         .hero .container {
             position: relative;
@@ -326,6 +564,15 @@
             font-size: 0.9rem;
             font-weight: 400;
             color: rgba(255,255,255,0.65);
+            opacity: 0;
+            animation: credentialSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-credentials span:nth-child(1) { animation-delay: 0.9s; }
+        .hero-credentials span:nth-child(2) { animation-delay: 1.05s; }
+        .hero-credentials span:nth-child(3) { animation-delay: 1.2s; }
+        @keyframes credentialSlide {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
         }
         .hero-buttons {
             display: flex;
@@ -522,6 +769,11 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+            transform: scale(0);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        [data-cascade].cascading .service-icon {
+            transform: scale(1);
         }
         .service-icon svg {
             width: 28px;
@@ -1141,9 +1393,9 @@
             <h2 class="section-title" data-i18n="services_title">Soluciones Integrales para su Empresa</h2>
             <p class="section-desc" data-i18n="services_desc">Servicios profesionales disenados para mantener su negocio en cumplimiento, optimizado y en crecimiento constante.</p>
         </div>
-        <div class="services-grid">
+        <div class="services-grid" data-cascade>
             <!-- Service 1: Contabilidad -->
-            <div class="service-card reveal">
+            <div class="service-card">
                 <div class="service-icon">
                     <svg viewBox="0 0 24 24"><path d="M4 2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z"/><path d="M8 6h8M8 10h8M8 14h5"/></svg>
                 </div>
@@ -1152,7 +1404,7 @@
                 <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
             <!-- Service 2: Auditoria -->
-            <div class="service-card reveal">
+            <div class="service-card">
                 <div class="service-icon">
                     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
                 </div>
@@ -1161,7 +1413,7 @@
                 <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
             <!-- Service 3: Impuestos -->
-            <div class="service-card reveal">
+            <div class="service-card">
                 <div class="service-icon">
                     <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
                 </div>
@@ -1170,7 +1422,7 @@
                 <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
             <!-- Service 4: Declaracion de Renta -->
-            <div class="service-card reveal">
+            <div class="service-card">
                 <div class="service-icon">
                     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><path d="M9 15l2 2 4-4"/></svg>
                 </div>
@@ -1179,7 +1431,7 @@
                 <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
             <!-- Service 5: SAGRILAFT -->
-            <div class="service-card reveal">
+            <div class="service-card">
                 <div class="service-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
                 </div>
@@ -1188,7 +1440,7 @@
                 <a href="#contact" class="service-link" data-i18n="svc_link">Consultar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             </div>
             <!-- Service 6: Etica y Transparencia -->
-            <div class="service-card reveal">
+            <div class="service-card">
                 <div class="service-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                 </div>
@@ -1208,7 +1460,7 @@
             <h2 class="section-title" data-i18n="flow_title">Como Trabajamos</h2>
             <p class="section-desc" data-i18n="flow_desc">Un proceso estructurado y transparente para garantizar resultados excepcionales en cada servicio.</p>
         </div>
-        <div class="reveal">
+        <div class="reveal-scale">
             <div id="flowDiagram"></div>
         </div>
     </div>
@@ -1233,7 +1485,7 @@
                     <div class="label" data-i18n="about_exp_label">Anos</div>
                 </div>
             </div>
-            <div class="about-content reveal-right">
+            <div class="about-content reveal-right" data-anim-track>
                 <div class="section-tag" data-i18n="about_tag">Sobre Nosotros</div>
                 <h3 data-i18n="about_title">Experiencia y Compromiso al Servicio de su Empresa</h3>
                 <p data-i18n="about_p1">Con mas de 15 anos de experiencia en contaduria publica, auditoria y cumplimiento normativo, Andrea La Torre ofrece un servicio personalizado y de alta calidad.</p>
@@ -1268,22 +1520,22 @@
             <div class="section-tag" data-i18n="why_tag">Por Que Elegirnos</div>
             <h2 class="section-title" data-i18n="why_title">La Diferencia Andrea La Torre</h2>
         </div>
-        <div class="why-grid">
-            <div class="why-card reveal">
+        <div class="why-grid" data-cascade>
+            <div class="why-card">
                 <div class="why-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <h3 data-i18n="why1_title">Confidencialidad Total</h3>
                 <p data-i18n="why1_desc">Su informacion financiera esta protegida con los mas altos estandares de seguridad y confidencialidad profesional.</p>
             </div>
-            <div class="why-card reveal">
+            <div class="why-card">
                 <div class="why-icon">
                     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
                 <h3 data-i18n="why2_title">Respuesta Oportuna</h3>
                 <p data-i18n="why2_desc">Cumplimos con los plazos establecidos y mantenemos comunicacion constante sobre el avance de cada proceso.</p>
             </div>
-            <div class="why-card reveal">
+            <div class="why-card">
                 <div class="why-icon">
                     <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                 </div>
@@ -1317,7 +1569,7 @@
             <p class="section-desc" data-i18n="contact_desc">Estamos listos para ayudarle. Comuniquese con nosotros por el medio que prefiera.</p>
         </div>
         <div class="contact-grid">
-            <div class="contact-info reveal-left">
+            <div class="contact-info reveal-left" data-anim-track>
                 <h3 data-i18n="contact_info_title">Informacion de Contacto</h3>
                 <p data-i18n="contact_info_desc">No dude en comunicarse. Responderemos a su consulta lo antes posible.</p>
                 <div class="contact-details">
@@ -1350,7 +1602,7 @@
                     </div>
                 </div>
             </div>
-            <div class="contact-form-wrapper reveal-right">
+            <div class="contact-form-wrapper reveal-right" data-anim-track>
                 <h4 data-i18n="form_title">Enviar Mensaje via WhatsApp</h4>
                 <form id="contactForm" onsubmit="sendWhatsApp(event)">
                     <div class="form-group">
@@ -1381,7 +1633,7 @@
 </section>
 
 <!-- ==================== FOOTER ==================== -->
-<footer class="footer">
+<footer class="footer" data-anim-track>
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
@@ -1663,17 +1915,66 @@ document.querySelectorAll('#navLinks a').forEach(a => {
     });
 });
 
-// ========== SCROLL REVEAL ==========
+// ========== SCROLL REVEAL WITH STAGGERING CASCADE ==========
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .section-header, .stats-bar').forEach(el => {
     revealObserver.observe(el);
+});
+
+// Cascade observer for grids with data-cascade attribute
+const cascadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('cascading');
+            cascadeObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('[data-cascade]').forEach(el => {
+    cascadeObserver.observe(el);
+});
+
+// Tracked element observer (for elements with child cascade animations)
+const trackObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            trackObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('[data-anim-track]').forEach(el => {
+    trackObserver.observe(el);
+});
+
+// ========== PARALLAX-LITE ON HERO GEOMETRIC SHAPES ==========
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const geo1 = document.querySelector('.hero-geo-1');
+            const geo2 = document.querySelector('.hero-geo-2');
+            const geo3 = document.querySelector('.hero-geo-3');
+            if (geo1 && scrollY < window.innerHeight) {
+                geo1.style.transform = `rotate(45deg) translate(${scrollY * 0.05}px, ${scrollY * -0.08}px)`;
+                geo2.style.transform = `rotate(30deg) translate(${scrollY * -0.04}px, ${scrollY * 0.06}px)`;
+                geo3.style.transform = `rotate(60deg) translate(${scrollY * 0.03}px, ${scrollY * 0.04}px)`;
+            }
+            ticking = false;
+        });
+        ticking = true;
+    }
 });
 
 // ========== COUNTER ANIMATION ==========
