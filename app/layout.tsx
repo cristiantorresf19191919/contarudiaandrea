@@ -17,9 +17,57 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Andrea La Torre | Contadora Publica - Auditoria y Control',
+  title: 'Andrea La Torre | Contadora P\u00fablica - Auditor\u00eda, Impuestos y SAGRILAFT en Colombia',
   description:
-    'Andrea La Torre - Contadora Publica, Especialista en Auditoria y Control, Oficial de cumplimiento SAGRILAFT. Servicios contables, tributarios y de cumplimiento en Colombia.',
+    'Andrea La Torre - Contadora P\u00fablica certificada con 15+ a\u00f1os de experiencia. Servicios de contabilidad, auditor\u00eda, declaraci\u00f3n de renta, impuestos y SAGRILAFT para empresas y personas naturales en Colombia. Consulta inicial GRATIS.',
+  keywords: 'contadora publica colombia, auditor\u00eda, declaracion de renta, SAGRILAFT, impuestos colombia, contabilidad empresas, DIAN, IVA, retencion en la fuente',
+  openGraph: {
+    title: 'Andrea La Torre | Contadora P\u00fablica Certificada',
+    description: 'Servicios contables, tributarios y de cumplimiento que impulsan la confianza y transparencia de su negocio. 15+ a\u00f1os de experiencia.',
+    type: 'website',
+    locale: 'es_CO',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Andrea La Torre - Contadora P\u00fablica',
+  description: 'Servicios profesionales de contabilidad, auditor\u00eda, impuestos, declaraci\u00f3n de renta y cumplimiento SAGRILAFT para empresas y personas naturales en Colombia.',
+  telephone: '+573022851810',
+  email: 'andrealato30@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'CO',
+    addressLocality: 'Colombia',
+  },
+  priceRange: '$$',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Colombia',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios Contables y Tributarios',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Contabilidad' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Auditor\u00eda' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Impuestos' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Declaraci\u00f3n de Renta' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SAGRILAFT / PADM' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '\u00c9tica y Transparencia Empresarial' } },
+    ],
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: '500',
+    bestRating: '5',
+  },
 };
 
 export default function RootLayout({
@@ -29,6 +77,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${montserrat.variable} ${playfair.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={montserrat.className}>{children}</body>
     </html>
   );

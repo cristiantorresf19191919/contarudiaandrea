@@ -1055,6 +1055,23 @@ ul { list-style: none; }
   z-index: 2;
   color: var(--white);
 }
+.cta-urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+.cta-urgency-badge svg { stroke: #F59E0B; flex-shrink: 0; }
 .cta-content h2 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 4vw, 3rem);
@@ -1063,11 +1080,43 @@ ul { list-style: none; }
 .cta-content p {
   font-size: 1.1rem;
   opacity: 0.7;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
 }
+.cta-bullets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.cta-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+}
+.cta-bullets li svg { flex-shrink: 0; }
+.btn-whatsapp-lg {
+  padding: 16px 40px;
+  font-size: 1rem;
+  box-shadow: 0 6px 30px rgba(37,211,102,0.4);
+}
+.cta-guarantee {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+}
+.cta-guarantee svg { stroke: rgba(255,255,255,0.5); }
 
 /* ========== CONTACT ========== */
 .contact { background: var(--white); }
@@ -1262,6 +1311,184 @@ ul { list-style: none; }
   100% { transform: scale(1.8); opacity: 0; }
 }
 
+/* ========== HERO GUARANTEE ========== */
+.hero-guarantee {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  margin-top: 14px;
+  letter-spacing: 0.5px;
+}
+.hero-guarantee svg { stroke: rgba(255,255,255,0.4); flex-shrink: 0; }
+
+/* ========== TRUST BADGES ========== */
+.trust-badges {
+  background: var(--white);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--gray);
+}
+.trust-badges-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: var(--gray-light);
+  border: 1px solid var(--gray);
+  transition: var(--transition);
+}
+.trust-badge:hover {
+  border-color: var(--red);
+  box-shadow: 0 2px 12px rgba(196,30,42,0.08);
+}
+.trust-badge-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--red);
+}
+.trust-badge-icon svg { stroke: var(--red); }
+.trust-badge-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* ========== TESTIMONIALS ========== */
+.testimonials-section { background: var(--gray-light); }
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.testimonial-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 36px 30px 30px;
+  position: relative;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(196,30,42,0.1);
+}
+.testimonial-quote {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  opacity: 0.6;
+}
+.testimonial-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+.testimonial-text {
+  font-size: 0.92rem;
+  color: var(--gray-mid);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--gray);
+}
+.testimonial-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), var(--burgundy));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+.testimonial-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+.testimonial-role {
+  font-size: 0.75rem;
+  color: var(--gray-mid);
+  line-height: 1.4;
+}
+
+/* ========== FAQ ========== */
+.faq-section { background: var(--white); }
+.faq-list {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: var(--gray-light);
+  border-radius: 14px;
+  border: 1px solid var(--gray);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.faq-item-open {
+  border-color: rgba(196,30,42,0.2);
+  box-shadow: 0 4px 20px rgba(196,30,42,0.06);
+}
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  text-align: left;
+  transition: var(--transition);
+}
+.faq-question:hover { color: var(--red); }
+.faq-item-open .faq-question { color: var(--red); }
+.faq-question svg { flex-shrink: 0; color: var(--gray-mid); }
+.faq-item-open .faq-question svg { color: var(--red); }
+.faq-answer {
+  overflow: hidden;
+}
+.faq-answer p {
+  padding: 0 24px 20px;
+  font-size: 0.9rem;
+  color: var(--gray-mid);
+  line-height: 1.75;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
   .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
@@ -1274,18 +1501,28 @@ ul { list-style: none; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .trust-badges-grid { gap: 20px; }
 }
 @media (max-width: 768px) {
   .nav-links-desktop { display: none; }
   .hamburger { display: flex; }
   .services-grid { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .section { padding: 70px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .rf-diagram { padding: 0; }
+  .trust-badges-grid { gap: 12px; }
+  .trust-badge { padding: 8px 14px; }
+  .trust-badge-label { font-size: 0.72rem; }
+  .faq-question { padding: 16px 18px; font-size: 0.88rem; }
+  .faq-answer p { padding: 0 18px 16px; font-size: 0.85rem; }
+  .cta-bullets { align-items: flex-start; padding: 0 20px; }
+  .cta-bullets li { font-size: 0.88rem; }
 }
 @media (max-width: 480px) {
   .stats-grid { grid-template-columns: 1fr; }
@@ -1294,6 +1531,9 @@ ul { list-style: none; }
   .contact-form-wrapper { padding: 24px; }
   .whatsapp-btn { width: 56px; height: 56px; }
   .whatsapp-btn svg { width: 28px; height: 28px; }
+  .trust-badges-grid { flex-direction: column; gap: 8px; }
+  .trust-badge { width: 100%; justify-content: center; }
+  .testimonial-card { padding: 28px 22px 24px; }
 }
 
 /* Reduced motion */
