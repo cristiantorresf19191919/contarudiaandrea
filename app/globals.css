@@ -551,64 +551,130 @@ ul { list-style: none; }
 }
 .service-card .service-link:hover { gap: 12px; }
 
-/* ========== FLOW DIAGRAM ========== */
+/* ========== FLOW DIAGRAM (React Flow) ========== */
 .flow-section { background: var(--white); }
-.flow-diagram {
+.flow-diagram-rf {
+  height: 280px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   background: var(--gray-light);
   border: 1px solid var(--gray);
-  padding: 48px 32px;
-  overflow-x: auto;
+  overflow: hidden;
+  position: relative;
 }
-.flow-steps {
+.flow-diagram-rf .react-flow__renderer { overflow: visible; }
+.flow-diagram-rf .react-flow__node { overflow: visible; }
+
+/* Custom node */
+.flow-node {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
-  min-width: 700px;
+  width: 150px;
+  height: 170px;
 }
-.flow-step-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0;
+.flow-node-glow {
+  position: absolute;
+  inset: 8px;
+  border-radius: 18px;
+  pointer-events: none;
 }
-.flow-step {
+.flow-node-inner {
+  position: relative;
+  width: 140px;
+  border-radius: 18px;
+  padding: 22px 16px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 20px 24px;
-  border-radius: 14px;
+  gap: 6px;
   color: var(--white);
-  min-width: 100px;
-  text-align: center;
+  z-index: 2;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.flow-step-number {
-  width: 40px;
-  height: 40px;
+.flow-node:hover .flow-node-inner {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+}
+.flow-node-icon-ring {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+}
+.flow-node-icon-ring-track {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top-color: rgba(255,255,255,0.25);
+}
+.flow-node-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 2px;
+  position: relative;
+  z-index: 2;
+}
+.flow-node-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.flow-node-step {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: rgba(255,255,255,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1rem;
-}
-.flow-step-label {
   font-size: 0.8rem;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+.flow-node-label {
+  font-size: 0.78rem;
   font-weight: 600;
   line-height: 1.3;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  max-width: 110px;
 }
-.flow-connector {
-  display: flex;
-  align-items: center;
-  width: 40px;
-  flex-shrink: 0;
+.flow-node-pulse {
+  position: absolute;
+  inset: 4px;
+  border-radius: 18px;
+  border: 2px solid;
+  pointer-events: none;
+  z-index: 1;
 }
-.flow-arrow {
-  width: 40px;
-  height: 20px;
+
+/* React Flow overrides */
+.flow-diagram-rf .react-flow__edge-path { transition: stroke 0.3s; }
+.flow-diagram-rf .react-flow__background { opacity: 0.6; }
+.flow-diagram-rf .react-flow__controls,
+.flow-diagram-rf .react-flow__minimap,
+.flow-diagram-rf .react-flow__attribution { display: none !important; }
+
+/* Animated dot on edge */
+.flow-diagram-rf circle {
+  filter: drop-shadow(0 0 6px #C41E2A);
+}
+
+@media (max-width: 768px) {
+  .flow-diagram-rf { height: 240px; }
+  .flow-node { width: 120px; height: 145px; }
+  .flow-node-inner { width: 110px; padding: 16px 10px 14px; border-radius: 14px; }
+  .flow-node-icon { width: 28px; height: 28px; }
+  .flow-node-label { font-size: 0.7rem; }
 }
 
 /* ========== ABOUT ========== */
