@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import { useLanguage } from '@/lib/LanguageContext';
 import Logo from './Logo';
 
@@ -21,6 +22,7 @@ export default function Navbar() {
     { href: '#flow', label: t('nav_process') },
     { href: '#about', label: t('nav_about') },
     { href: '#contact', label: t('nav_contact') },
+    { href: '/blog', label: t('nav_blog'), isRoute: true },
   ];
 
   return (
@@ -33,11 +35,17 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div className="nav-links-desktop">
-          {links.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.isRoute ? (
+              <Link key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ) : (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            )
+          )}
           <div className="lang-toggle">
             <button
               className={`lang-btn ${lang === 'es' ? 'active' : ''}`}
@@ -82,19 +90,33 @@ export default function Navbar() {
                   visible: { transition: { staggerChildren: 0.08 } },
                 }}
               >
-                {links.map((link) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 },
-                    }}
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
+                {links.map((link) =>
+                  link.isRoute ? (
+                    <motion.div
+                      key={link.href}
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                    >
+                      <Link href={link.href} onClick={() => setMenuOpen(false)}>
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0 },
+                      }}
+                    >
+                      {link.label}
+                    </motion.a>
+                  )
+                )}
                 <motion.div
                   className="lang-toggle"
                   variants={{

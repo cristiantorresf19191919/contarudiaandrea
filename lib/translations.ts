@@ -6,6 +6,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     nav_process: 'Proceso',
     nav_about: 'Nosotros',
     nav_contact: 'Contacto',
+    nav_blog: 'Blog',
     hero_badge: 'Contadora P\u00fablica Certificada',
     hero_subtitle:
       'Soluciones contables, tributarias y de cumplimiento que impulsan la confianza y transparencia de su negocio.',
@@ -185,6 +186,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     nav_process: 'Process',
     nav_about: 'About',
     nav_contact: 'Contact',
+    nav_blog: 'Blog',
     hero_badge: 'Certified Public Accountant',
     hero_subtitle:
       'Accounting, tax, and compliance solutions that build trust and transparency for your business.',
