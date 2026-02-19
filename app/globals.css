@@ -551,18 +551,18 @@ ul { list-style: none; }
 }
 .service-card .service-link:hover { gap: 12px; }
 
-/* ========== FLOW DIAGRAM (React Flow) ========== */
+/* ========== FLOW DIAGRAMS ========== */
 .flow-section { background: var(--white); }
 
 /* --- Tab Selector --- */
-.rf-tabs {
+.fd-tabs {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-bottom: 28px;
   flex-wrap: wrap;
 }
-.rf-tab {
+.fd-tab {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -579,25 +579,25 @@ ul { list-style: none; }
   transition: var(--transition);
   overflow: hidden;
 }
-.rf-tab:hover {
+.fd-tab:hover {
   border-color: var(--red);
   color: var(--red);
 }
-.rf-tab-active {
+.fd-tab-active {
   border-color: var(--red);
   color: var(--white);
   background: var(--red);
 }
-.rf-tab-active:hover { color: var(--white); }
-.rf-tab-icon {
+.fd-tab-active:hover { color: var(--white); }
+.fd-tab-icon {
   width: 16px;
   height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.rf-tab-icon svg { width: 16px; height: 16px; }
-.rf-tab-indicator {
+.fd-tab-icon svg { width: 16px; height: 16px; }
+.fd-tab-indicator {
   position: absolute;
   inset: 0;
   background: var(--red);
@@ -606,133 +606,135 @@ ul { list-style: none; }
 }
 
 /* --- Diagram Container --- */
-.rf-diagram {
-  height: 420px;
+.fd-diagram {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   background: linear-gradient(180deg, var(--gray-light) 0%, #FAFAFA 100%);
   border: 1px solid var(--gray);
-  overflow: hidden;
-  position: relative;
+  padding: 48px 40px;
+  overflow-x: auto;
 }
-.rf-diagram .react-flow__renderer { overflow: visible; }
-.rf-diagram .react-flow__node { overflow: visible; }
-.rf-diagram .react-flow__edge-path { transition: stroke 0.3s; }
-.rf-diagram .react-flow__background { opacity: 0.6; }
-.rf-diagram .react-flow__controls,
-.rf-diagram .react-flow__minimap,
-.rf-diagram .react-flow__attribution { display: none !important; }
-.rf-diagram circle { filter: drop-shadow(0 0 6px #C41E2A); }
 
-/* --- Process Node (Service Flow) --- */
-.rf-process-node {
-  position: relative;
+/* --- Arrow Connector --- */
+.fd-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
-  height: 170px;
+  flex-shrink: 0;
 }
-.rf-process-glow {
-  position: absolute;
-  inset: 8px;
-  border-radius: 18px;
-  pointer-events: none;
+.fd-arrow-vert {
+  display: flex;
+  justify-content: center;
 }
-.rf-process-inner {
-  position: relative;
-  width: 140px;
-  border-radius: 18px;
-  padding: 22px 16px 18px;
+
+/* ========== SERVICE FLOW ========== */
+.fd-service-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  min-width: min-content;
+}
+.fd-service-item {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.fd-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 20px 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  color: var(--white);
-  z-index: 2;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 10px;
+  min-width: 140px;
+  max-width: 160px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1.5px solid var(--gray);
+  cursor: default;
+  transition: var(--transition);
 }
-.rf-process-node:hover .rf-process-inner {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+.fd-card:hover {
+  border-color: rgba(196,30,42,0.2);
 }
-.rf-process-ring {
-  position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-top-color: rgba(255,255,255,0.25);
-  pointer-events: none;
-}
-.rf-process-icon {
-  width: 36px;
-  height: 36px;
-  margin-bottom: 2px;
-  position: relative;
-  z-index: 2;
-}
-.rf-process-icon svg { width: 100%; height: 100%; }
-.rf-process-step {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
+.fd-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 0.8rem;
-  position: relative;
-  z-index: 2;
-  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
 }
-.rf-process-label {
+.fd-card-icon svg { width: 26px; height: 26px; }
+.fd-card-step {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.fd-card-label {
   font-size: 0.78rem;
   font-weight: 600;
-  line-height: 1.3;
+  color: var(--charcoal);
   text-align: center;
-  position: relative;
-  z-index: 2;
-  max-width: 110px;
-}
-.rf-process-pulse {
-  position: absolute;
-  inset: 4px;
-  border-radius: 18px;
-  border: 2px solid;
-  pointer-events: none;
-  z-index: 1;
+  line-height: 1.3;
 }
 
-/* --- Hub Node (Central Company) --- */
-.rf-hub-node {
+/* ========== TAX FLOW ========== */
+.fd-tax-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: min-content;
+}
+.fd-tax-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fd-tax-col-hub {
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+}
+.fd-tax-col-taxes {
+  min-width: 200px;
+}
+.fd-tax-col-dests {
+  min-width: 130px;
+}
+.fd-tax-arrows {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+  min-width: 50px;
+}
+.fd-tax-line {
+  width: 100%;
+  transform-origin: left center;
+}
+.fd-hub {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.rf-hub-ring-outer {
+.fd-hub-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 2px dashed rgba(196,30,42,0.2);
+  border: 2px dashed rgba(196,30,42,0.18);
   pointer-events: none;
 }
-.rf-hub-ring-inner {
-  position: absolute;
-  inset: 15px;
-  border-radius: 50%;
-  border: 1px solid rgba(196,30,42,0.12);
-  pointer-events: none;
-}
-.rf-hub-core {
+.fd-hub-core {
   position: relative;
   z-index: 2;
   width: 100px;
@@ -745,193 +747,174 @@ ul { list-style: none; }
   justify-content: center;
   gap: 4px;
   color: var(--white);
-  box-shadow: 0 8px 30px rgba(74,14,27,0.3);
+  box-shadow: 0 8px 30px rgba(74,14,27,0.25);
 }
-.rf-hub-icon {
-  width: 32px;
-  height: 32px;
-}
-.rf-hub-icon svg { width: 100%; height: 100%; }
-.rf-hub-label {
-  font-size: 0.7rem;
+.fd-hub-icon { width: 30px; height: 30px; }
+.fd-hub-icon svg { width: 100%; height: 100%; }
+.fd-hub-label {
+  font-size: 0.72rem;
   font-weight: 600;
   text-align: center;
-  max-width: 80px;
-  line-height: 1.2;
 }
-.rf-hub-pulse {
-  position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-  border: 2px solid var(--red);
-  pointer-events: none;
-}
-
-/* --- Tax Node (Obligation Cards) --- */
-.rf-tax-node {
-  position: relative;
-  width: 155px;
-}
-.rf-tax-inner {
-  border-radius: 14px;
-  padding: 14px 16px;
+.fd-tax-card {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
-  color: var(--white);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.rf-tax-node:hover .rf-tax-inner {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 10px 35px rgba(0,0,0,0.2);
-}
-.rf-tax-icon {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 2px;
-}
-.rf-tax-icon svg { width: 100%; height: 100%; }
-.rf-tax-label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-align: center;
-  line-height: 1.2;
-}
-.rf-tax-sub {
-  font-size: 0.65rem;
-  font-weight: 400;
-  opacity: 0.75;
-  text-align: center;
-}
-.rf-tax-badge {
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 0.6rem;
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  white-space: nowrap;
-}
-
-/* --- Destination Node (DIAN, Sec. Hacienda, etc.) --- */
-.rf-dest-node {
-  position: relative;
-  width: 140px;
-}
-.rf-dest-inner {
-  border-radius: 14px;
-  padding: 18px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  color: var(--white);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.rf-dest-node:hover .rf-dest-inner {
-  transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 10px 35px rgba(0,0,0,0.2);
-}
-.rf-dest-icon {
-  width: 28px;
-  height: 28px;
-}
-.rf-dest-icon svg { width: 100%; height: 100%; }
-.rf-dest-label {
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-align: center;
-}
-.rf-dest-glow {
-  position: absolute;
-  inset: -6px;
-  border-radius: 20px;
-  filter: blur(12px);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* --- Cycle Node (Accounting Cycle) --- */
-.rf-cycle-node {
-  position: relative;
-  width: 155px;
-}
-.rf-cycle-inner {
-  border-radius: 16px;
-  border: 2px solid;
+  gap: 14px;
   background: var(--white);
-  padding: 16px 14px 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  padding: 14px 18px;
+  border-left: 4px solid;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  cursor: default;
+  transition: var(--transition);
 }
-.rf-cycle-icon-wrap {
-  width: 38px;
-  height: 38px;
+.fd-tax-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.fd-tax-card-icon {
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  flex-shrink: 0;
 }
-.rf-cycle-icon {
-  width: 22px;
-  height: 22px;
+.fd-tax-card-icon svg { width: 20px; height: 20px; }
+.fd-tax-card-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.2;
 }
-.rf-cycle-icon svg { width: 100%; height: 100%; }
-.rf-cycle-step {
+.fd-tax-card-freq {
   font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--gray-mid);
+}
+.fd-dest-card {
+  border-radius: 14px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  cursor: default;
+  transition: var(--transition);
+}
+.fd-dest-icon { width: 28px; height: 28px; }
+.fd-dest-icon svg { width: 100%; height: 100%; }
+.fd-dest-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ========== CYCLE FLOW ========== */
+.fd-cycle-flow {
+  position: relative;
+}
+.fd-cycle-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.fd-cycle-item {
+  display: flex;
+  align-items: center;
+}
+.fd-cycle-card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 2px solid;
+  padding: 24px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  max-width: 165px;
+  cursor: default;
+  transition: var(--transition);
+}
+.fd-cycle-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+.fd-cycle-card-icon svg { width: 24px; height: 24px; }
+.fd-cycle-card-step {
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.5px;
 }
-.rf-cycle-label {
-  font-size: 0.72rem;
+.fd-cycle-card-label {
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--charcoal);
   text-align: center;
-  line-height: 1.25;
-  max-width: 120px;
+  line-height: 1.3;
+}
+.fd-cycle-turn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 0;
+}
+.fd-cycle-turn-right {
+  justify-content: flex-end;
+  padding-right: 60px;
+}
+.fd-cycle-turn-left {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* --- Responsive --- */
+/* --- Responsive Flow --- */
 @media (max-width: 1024px) {
-  .rf-diagram { height: 380px; }
+  .fd-diagram { padding: 36px 24px; }
+  .fd-card { min-width: 120px; max-width: 140px; padding: 22px 14px 18px; }
+  .fd-card-icon { width: 40px; height: 40px; }
+  .fd-card-icon svg { width: 22px; height: 22px; }
+  .fd-card-label { font-size: 0.72rem; }
+  .fd-cycle-card { min-width: 120px; max-width: 140px; }
 }
 @media (max-width: 768px) {
-  .rf-diagram { height: 320px; }
-  .rf-tabs { gap: 6px; }
-  .rf-tab { padding: 10px 18px; font-size: 0.75rem; }
-  .rf-process-node { width: 120px; height: 145px; }
-  .rf-process-inner { width: 110px; padding: 16px 10px 14px; border-radius: 14px; }
-  .rf-process-icon { width: 28px; height: 28px; }
-  .rf-process-label { font-size: 0.7rem; }
-  .rf-hub-node { width: 120px; height: 120px; }
-  .rf-hub-core { width: 75px; height: 75px; }
-  .rf-hub-icon { width: 24px; height: 24px; }
-  .rf-hub-label { font-size: 0.6rem; }
-  .rf-tax-node { width: 120px; }
-  .rf-tax-inner { padding: 10px 12px; }
-  .rf-tax-label { font-size: 0.7rem; }
-  .rf-dest-node { width: 110px; }
-  .rf-dest-inner { padding: 14px 12px; }
-  .rf-cycle-node { width: 120px; }
-  .rf-cycle-inner { padding: 12px 10px 10px; }
-  .rf-cycle-label { font-size: 0.65rem; }
+  .fd-diagram { padding: 28px 16px; overflow-x: auto; }
+  .fd-tabs { gap: 6px; }
+  .fd-tab { padding: 10px 18px; font-size: 0.75rem; }
+  .fd-service-flow { justify-content: flex-start; }
+  .fd-card { min-width: 110px; max-width: 130px; padding: 18px 12px 14px; }
+  .fd-card-icon { width: 36px; height: 36px; border-radius: 10px; }
+  .fd-card-label { font-size: 0.68rem; }
+  .fd-tax-flow { justify-content: flex-start; }
+  .fd-hub { width: 110px; height: 110px; }
+  .fd-hub-core { width: 80px; height: 80px; }
+  .fd-hub-icon { width: 24px; height: 24px; }
+  .fd-hub-label { font-size: 0.65rem; }
+  .fd-tax-card { padding: 10px 14px; gap: 10px; }
+  .fd-tax-card-icon { width: 30px; height: 30px; }
+  .fd-tax-card-name { font-size: 0.75rem; }
+  .fd-dest-card { padding: 14px 12px; }
+  .fd-dest-label { font-size: 0.72rem; }
+  .fd-cycle-row { justify-content: flex-start; }
+  .fd-cycle-card { min-width: 110px; max-width: 130px; padding: 18px 12px 14px; }
+  .fd-cycle-card-icon { width: 36px; height: 36px; }
+  .fd-cycle-card-label { font-size: 0.68rem; }
+  .fd-cycle-turn-left { display: none; }
 }
 @media (max-width: 480px) {
-  .rf-diagram { height: 260px; }
-  .rf-tab { padding: 8px 14px; font-size: 0.7rem; gap: 4px; }
-  .rf-tab-icon { display: none; }
+  .fd-tab { padding: 8px 14px; font-size: 0.7rem; gap: 4px; }
+  .fd-tab-icon { display: none; }
+  .fd-diagram { padding: 20px 12px; }
 }
 
 /* ========== ABOUT ========== */
@@ -1515,7 +1498,7 @@ ul { list-style: none; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .section { padding: 70px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .rf-diagram { padding: 0; }
+  .fd-diagram { padding: 20px 12px; }
   .trust-badges-grid { gap: 12px; }
   .trust-badge { padding: 8px 14px; }
   .trust-badge-label { font-size: 0.72rem; }
