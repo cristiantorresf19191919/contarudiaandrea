@@ -551,15 +551,24 @@ ul { list-style: none; }
 }
 .service-card .service-link:hover { gap: 12px; }
 
-/* ========== FLOW DIAGRAMS ========== */
+/* ========== FLOW DIAGRAMS - DARK THEME ========== */
 .flow-section { background: var(--white); }
+
+/* --- Toolbar (tabs + fullscreen button) --- */
+.fd-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
 
 /* --- Tab Selector --- */
 .fd-tabs {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 28px;
   flex-wrap: wrap;
 }
 .fd-tab {
@@ -567,26 +576,29 @@ ul { list-style: none; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 28px;
-  border: 2px solid var(--gray);
+  padding: 12px 24px;
+  border: 1.5px solid rgba(255,255,255,0.15);
   border-radius: 50px;
-  background: var(--white);
+  background: rgba(30,30,35,0.8);
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--gray-mid);
+  color: rgba(255,255,255,0.5);
   cursor: pointer;
   transition: var(--transition);
   overflow: hidden;
+  backdrop-filter: blur(8px);
 }
 .fd-tab:hover {
-  border-color: var(--red);
-  color: var(--red);
+  border-color: rgba(255,77,90,0.5);
+  color: #ff4d5a;
+  background: rgba(255,77,90,0.08);
 }
 .fd-tab-active {
-  border-color: var(--red);
+  border-color: #ff4d5a;
   color: var(--white);
-  background: var(--red);
+  background: linear-gradient(135deg, #c41e2a, #a01722);
+  box-shadow: 0 4px 20px rgba(196,30,42,0.4);
 }
 .fd-tab-active:hover { color: var(--white); }
 .fd-tab-icon {
@@ -600,19 +612,77 @@ ul { list-style: none; }
 .fd-tab-indicator {
   position: absolute;
   inset: 0;
-  background: var(--red);
+  background: linear-gradient(135deg, #c41e2a, #a01722);
   border-radius: 50px;
   z-index: -1;
 }
 
-/* --- Diagram Container --- */
+/* --- Fullscreen Button --- */
+.fd-fullscreen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  background: rgba(30,30,35,0.8);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+}
+.fd-fullscreen-btn:hover {
+  border-color: rgba(255,77,90,0.5);
+  color: #ff4d5a;
+  background: rgba(255,77,90,0.08);
+}
+.fd-fullscreen-btn-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fd-fullscreen-btn-icon svg { width: 16px; height: 16px; }
+
+/* --- Diagram Container (DARK) --- */
 .fd-diagram {
+  position: relative;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  background: linear-gradient(180deg, var(--gray-light) 0%, #FAFAFA 100%);
-  border: 1px solid var(--gray);
+  box-shadow: 0 8px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  background: linear-gradient(160deg, #0f0f14 0%, #1a1a24 40%, #12121a 100%);
+  border: 1px solid rgba(255,255,255,0.08);
   padding: 48px 40px;
-  overflow-x: auto;
+  overflow: hidden;
+}
+.fd-diagram::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,77,90,0.3), transparent);
+}
+
+/* --- Animated Particles --- */
+.fd-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.fd-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,77,90,0.4);
+  box-shadow: 0 0 6px rgba(255,77,90,0.3);
 }
 
 /* --- Arrow Connector --- */
@@ -627,8 +697,10 @@ ul { list-style: none; }
   justify-content: center;
 }
 
-/* ========== SERVICE FLOW ========== */
+/* ========== SERVICE FLOW (DARK) ========== */
 .fd-service-flow {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -642,7 +714,7 @@ ul { list-style: none; }
   gap: 0;
 }
 .fd-card {
-  background: var(--white);
+  background: rgba(255,255,255,0.04);
   border-radius: 16px;
   padding: 28px 20px 22px;
   display: flex;
@@ -651,13 +723,15 @@ ul { list-style: none; }
   gap: 10px;
   min-width: 140px;
   max-width: 160px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  border: 1.5px solid var(--gray);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  border: 1.5px solid rgba(255,255,255,0.08);
   cursor: default;
   transition: var(--transition);
+  backdrop-filter: blur(12px);
 }
 .fd-card:hover {
-  border-color: rgba(196,30,42,0.2);
+  border-color: rgba(255,77,90,0.3);
+  background: rgba(255,255,255,0.07);
 }
 .fd-card-icon {
   width: 48px;
@@ -666,7 +740,6 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
 }
 .fd-card-icon svg { width: 26px; height: 26px; }
 .fd-card-step {
@@ -677,13 +750,15 @@ ul { list-style: none; }
 .fd-card-label {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--charcoal);
+  color: rgba(255,255,255,0.85);
   text-align: center;
   line-height: 1.3;
 }
 
-/* ========== TAX FLOW ========== */
+/* ========== TAX FLOW (DARK) ========== */
 .fd-tax-flow {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -731,8 +806,12 @@ ul { list-style: none; }
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 2px dashed rgba(196,30,42,0.18);
+  border: 2px dashed rgba(255,77,90,0.25);
   pointer-events: none;
+}
+.fd-hub-ring-2 {
+  inset: -10px;
+  border: 1px dashed rgba(255,77,90,0.12);
 }
 .fd-hub-core {
   position: relative;
@@ -740,14 +819,14 @@ ul { list-style: none; }
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--burgundy), var(--charcoal));
+  background: linear-gradient(135deg, #c41e2a, #6b1520);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
   color: var(--white);
-  box-shadow: 0 8px 30px rgba(74,14,27,0.25);
+  box-shadow: 0 8px 35px rgba(196,30,42,0.4), 0 0 60px rgba(196,30,42,0.15);
 }
 .fd-hub-icon { width: 30px; height: 30px; }
 .fd-hub-icon svg { width: 100%; height: 100%; }
@@ -760,16 +839,17 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   gap: 14px;
-  background: var(--white);
+  background: rgba(255,255,255,0.04);
   border-radius: 12px;
   padding: 14px 18px;
   border-left: 4px solid;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
   cursor: default;
   transition: var(--transition);
+  backdrop-filter: blur(8px);
 }
 .fd-tax-card:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.07);
 }
 .fd-tax-card-icon {
   width: 36px;
@@ -784,13 +864,13 @@ ul { list-style: none; }
 .fd-tax-card-name {
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--charcoal);
+  color: rgba(255,255,255,0.9);
   line-height: 1.2;
 }
 .fd-tax-card-freq {
   font-size: 0.7rem;
   font-weight: 500;
-  color: var(--gray-mid);
+  color: rgba(255,255,255,0.45);
 }
 .fd-dest-card {
   border-radius: 14px;
@@ -800,7 +880,6 @@ ul { list-style: none; }
   align-items: center;
   gap: 8px;
   color: var(--white);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
   cursor: default;
   transition: var(--transition);
 }
@@ -812,9 +891,10 @@ ul { list-style: none; }
   text-align: center;
 }
 
-/* ========== CYCLE FLOW ========== */
+/* ========== CYCLE FLOW (DARK) ========== */
 .fd-cycle-flow {
   position: relative;
+  z-index: 1;
 }
 .fd-cycle-row {
   display: flex;
@@ -827,7 +907,7 @@ ul { list-style: none; }
   align-items: center;
 }
 .fd-cycle-card {
-  background: var(--white);
+  background: rgba(255,255,255,0.04);
   border-radius: 16px;
   border: 2px solid;
   padding: 24px 18px 18px;
@@ -839,6 +919,10 @@ ul { list-style: none; }
   max-width: 165px;
   cursor: default;
   transition: var(--transition);
+  backdrop-filter: blur(8px);
+}
+.fd-cycle-card:hover {
+  background: rgba(255,255,255,0.07);
 }
 .fd-cycle-card-icon {
   width: 44px;
@@ -847,7 +931,6 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
 }
 .fd-cycle-card-icon svg { width: 24px; height: 24px; }
 .fd-cycle-card-step {
@@ -858,7 +941,7 @@ ul { list-style: none; }
 .fd-cycle-card-label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--charcoal);
+  color: rgba(255,255,255,0.85);
   text-align: center;
   line-height: 1.3;
 }
@@ -878,7 +961,190 @@ ul { list-style: none; }
   transform: translateY(-50%);
 }
 
-/* --- Responsive Flow --- */
+/* ========== INVOICE FLOW (DARK) ========== */
+.fd-invoice-flow {
+  position: relative;
+  z-index: 1;
+}
+.fd-invoice-badges {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.fd-invoice-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border: 1px solid;
+}
+.fd-invoice-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: fd-pulse-dot 2s ease-in-out infinite;
+}
+@keyframes fd-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+.fd-invoice-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  min-width: min-content;
+}
+.fd-invoice-item {
+  display: flex;
+  align-items: center;
+}
+.fd-invoice-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transform-origin: left center;
+}
+.fd-invoice-card {
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  border-radius: 18px;
+  padding: 28px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 130px;
+  max-width: 155px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  cursor: default;
+  transition: var(--transition);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+.fd-invoice-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.07);
+}
+.fd-invoice-card-glow {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  z-index: 0;
+}
+.fd-invoice-card-icon {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fd-invoice-card-icon svg { width: 26px; height: 26px; }
+.fd-invoice-card-num {
+  position: relative;
+  z-index: 1;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.fd-invoice-card-label {
+  position: relative;
+  z-index: 1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  line-height: 1.3;
+}
+.fd-invoice-card-desc {
+  position: relative;
+  z-index: 1;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ========== FULLSCREEN PORTAL ========== */
+.fd-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(160deg, #0a0a0f 0%, #141420 40%, #0e0e16 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.fd-fullscreen-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-wrap: wrap;
+}
+.fd-fullscreen-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1.5px solid rgba(255,77,90,0.3);
+  border-radius: 50px;
+  background: rgba(255,77,90,0.1);
+  color: #ff4d5a;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.fd-fullscreen-close:hover {
+  background: rgba(255,77,90,0.2);
+  border-color: #ff4d5a;
+}
+.fd-fullscreen-close-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
+.fd-fullscreen-close-icon svg { width: 16px; height: 16px; }
+.fd-fullscreen-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  overflow: auto;
+}
+.fd-diagram-fullscreen {
+  min-width: 80vw;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fd-diagram-fullscreen .fd-service-flow,
+.fd-diagram-fullscreen .fd-tax-flow,
+.fd-diagram-fullscreen .fd-cycle-flow,
+.fd-diagram-fullscreen .fd-invoice-flow {
+  transform: scale(1.15);
+  transform-origin: center;
+}
+
+/* --- Responsive Flow (DARK) --- */
 @media (max-width: 1024px) {
   .fd-diagram { padding: 36px 24px; }
   .fd-card { min-width: 120px; max-width: 140px; padding: 22px 14px 18px; }
@@ -886,11 +1152,19 @@ ul { list-style: none; }
   .fd-card-icon svg { width: 22px; height: 22px; }
   .fd-card-label { font-size: 0.72rem; }
   .fd-cycle-card { min-width: 120px; max-width: 140px; }
+  .fd-invoice-card { min-width: 115px; max-width: 140px; }
+  .fd-diagram-fullscreen .fd-service-flow,
+  .fd-diagram-fullscreen .fd-tax-flow,
+  .fd-diagram-fullscreen .fd-cycle-flow,
+  .fd-diagram-fullscreen .fd-invoice-flow { transform: scale(1); }
 }
 @media (max-width: 768px) {
   .fd-diagram { padding: 28px 16px; overflow-x: auto; }
+  .fd-toolbar { gap: 10px; }
   .fd-tabs { gap: 6px; }
-  .fd-tab { padding: 10px 18px; font-size: 0.75rem; }
+  .fd-tab { padding: 10px 16px; font-size: 0.73rem; }
+  .fd-fullscreen-btn-text { display: none; }
+  .fd-fullscreen-btn { padding: 10px 14px; }
   .fd-service-flow { justify-content: flex-start; }
   .fd-card { min-width: 110px; max-width: 130px; padding: 18px 12px 14px; }
   .fd-card-icon { width: 36px; height: 36px; border-radius: 10px; }
@@ -910,11 +1184,24 @@ ul { list-style: none; }
   .fd-cycle-card-icon { width: 36px; height: 36px; }
   .fd-cycle-card-label { font-size: 0.68rem; }
   .fd-cycle-turn-left { display: none; }
+  .fd-invoice-steps { justify-content: flex-start; }
+  .fd-invoice-card { min-width: 100px; max-width: 120px; padding: 18px 12px 14px; }
+  .fd-invoice-card-icon { width: 36px; height: 36px; }
+  .fd-invoice-card-label { font-size: 0.68rem; }
+  .fd-invoice-badges { gap: 8px; }
+  .fd-invoice-badge { font-size: 0.65rem; padding: 5px 12px; }
+  .fd-fullscreen-content { padding: 16px; }
+  .fd-diagram-fullscreen { min-width: auto; min-height: auto; overflow-x: auto; }
+  .fd-diagram-fullscreen .fd-service-flow,
+  .fd-diagram-fullscreen .fd-tax-flow,
+  .fd-diagram-fullscreen .fd-cycle-flow,
+  .fd-diagram-fullscreen .fd-invoice-flow { transform: scale(1); }
 }
 @media (max-width: 480px) {
-  .fd-tab { padding: 8px 14px; font-size: 0.7rem; gap: 4px; }
+  .fd-tab { padding: 8px 12px; font-size: 0.68rem; gap: 4px; }
   .fd-tab-icon { display: none; }
   .fd-diagram { padding: 20px 12px; }
+  .fd-invoice-badge { font-size: 0.6rem; padding: 4px 10px; }
 }
 
 /* ========== ABOUT ========== */
