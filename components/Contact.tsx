@@ -8,12 +8,12 @@ import SectionHeader from './SectionHeader';
 
 const contactItemContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+  visible: { transition: { staggerChildren: 0.18, delayChildren: 0.25 } },
 };
 
 const formFieldContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
 };
 
 export default function Contact() {
@@ -60,7 +60,7 @@ export default function Contact() {
             variants={slideLeft}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: true, margin: '-50px' }}
           >
             <h3>{t('contact_info_title')}</h3>
             <p>{t('contact_info_desc')}</p>
@@ -106,13 +106,13 @@ export default function Contact() {
             variants={slideRight}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: true, margin: '-50px' }}
           >
             <motion.h4
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
               {t('form_title')}
             </motion.h4>

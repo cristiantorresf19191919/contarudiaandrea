@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/LanguageContext';
-import { staggerContainer, cascadeCard, iconSpin } from '@/lib/animations';
+import { staggerContainerSlow, cascadeCard, iconSpin } from '@/lib/animations';
 import SectionHeader from './SectionHeader';
 
 const whyIcons = [
@@ -26,10 +26,10 @@ export default function WhyChoose() {
         <SectionHeader tag={t('why_tag')} title={t('why_title')} />
         <motion.div
           className="why-grid"
-          variants={staggerContainer}
+          variants={staggerContainerSlow}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-30px' }}
+          viewport={{ once: true, margin: '-40px' }}
         >
           {items.map((item, i) => (
             <motion.div key={i} className="why-card" variants={cascadeCard}>

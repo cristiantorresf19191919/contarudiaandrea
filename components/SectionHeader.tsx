@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { staggerContainer, fadeUp, lineGrow } from '@/lib/animations';
+import { staggerContainerElegant, fadeUp, lineGrow } from '@/lib/animations';
 
 export default function SectionHeader({
   tag,
@@ -15,10 +15,10 @@ export default function SectionHeader({
   return (
     <motion.div
       className="section-header"
-      variants={staggerContainer}
+      variants={staggerContainerElegant}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: true, margin: '-50px' }}
     >
       <motion.div className="section-tag" variants={fadeUp}>
         {tag}

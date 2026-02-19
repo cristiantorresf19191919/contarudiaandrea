@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/LanguageContext';
-import { staggerContainer, cascadeCard, iconBounce } from '@/lib/animations';
+import { staggerContainerSlow, cascadeCard, iconBounce } from '@/lib/animations';
 import SectionHeader from './SectionHeader';
 
 const serviceIcons = [
@@ -36,10 +36,10 @@ export default function Services() {
         />
         <motion.div
           className="services-grid"
-          variants={staggerContainer}
+          variants={staggerContainerSlow}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-30px' }}
+          viewport={{ once: true, margin: '-40px' }}
         >
           {services.map((svc, i) => (
             <motion.div key={i} className="service-card" variants={cascadeCard}>

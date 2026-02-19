@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/LanguageContext';
-import { staggerContainer, cascadeCard } from '@/lib/animations';
+import { staggerContainerSlow, cascadeCard } from '@/lib/animations';
 import SectionHeader from './SectionHeader';
 
 const starIcon = (
@@ -37,13 +37,13 @@ export default function Testimonials() {
         />
         <motion.div
           className="testimonials-grid"
-          variants={staggerContainer}
+          variants={staggerContainerSlow}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
         >
           {testimonials.map((item, i) => (
-            <motion.div key={i} className="testimonial-card" variants={cascadeCard} custom={i}>
+            <motion.div key={i} className="testimonial-card" variants={cascadeCard}>
               <div className="testimonial-quote">{quoteIcon}</div>
               <div className="testimonial-stars">
                 {Array.from({ length: item.rating }).map((_, j) => (

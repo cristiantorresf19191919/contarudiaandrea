@@ -7,7 +7,7 @@ import Logo from './Logo';
 
 const footerContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.18, delayChildren: 0.12 } },
 };
 
 export default function Footer() {

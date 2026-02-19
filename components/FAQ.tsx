@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/lib/LanguageContext';
-import { staggerContainer, fadeUp } from '@/lib/animations';
+import { staggerContainerSlow, fadeUp } from '@/lib/animations';
 import SectionHeader from './SectionHeader';
 
 function FAQItem({ question, answer, isOpen, onToggle }: { question: string; answer: string; isOpen: boolean; onToggle: () => void }) {
@@ -21,7 +21,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: { question: string; ans
           strokeLinecap="round"
           strokeLinejoin="round"
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <polyline points="6 9 12 15 18 9" />
         </motion.svg>
@@ -33,7 +33,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: { question: string; ans
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <p>{answer}</p>
           </motion.div>
@@ -62,7 +62,7 @@ export default function FAQ() {
         <SectionHeader tag={t('faq_tag')} title={t('faq_title')} desc={t('faq_desc')} />
         <motion.div
           className="faq-list"
-          variants={staggerContainer}
+          variants={staggerContainerSlow}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}

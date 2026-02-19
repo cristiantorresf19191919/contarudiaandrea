@@ -4,11 +4,12 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const badgeVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15, filter: 'blur(3px)' },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 },
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 },
   }),
 };
 

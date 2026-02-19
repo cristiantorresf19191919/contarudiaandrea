@@ -8,15 +8,16 @@ import Logo from './Logo';
 
 const heroContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
+  visible: { transition: { staggerChildren: 0.2, delayChildren: 0.3 } },
 };
 
 const credentialItem = {
-  hidden: { opacity: 0, x: -20 },
+  hidden: { opacity: 0, x: -15, filter: 'blur(3px)' },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    filter: 'blur(0px)',
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -28,10 +29,12 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  const geo1Y = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const geo1X = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const geo2Y = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const geo3Y = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const geo1Y = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const geo1X = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  const geo2Y = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const geo3Y = useTransform(scrollYProgress, [0, 1], [0, 25]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <section className="hero" id="hero" ref={ref}>
@@ -39,23 +42,23 @@ export default function Hero() {
       <motion.div
         className="hero-geo hero-geo-1"
         style={{ y: geo1Y, x: geo1X }}
-        initial={{ opacity: 0, scale: 0.3 }}
+        initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+        transition={{ duration: 2, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
       />
       <motion.div
         className="hero-geo hero-geo-2"
         style={{ y: geo2Y }}
-        initial={{ opacity: 0, scale: 0.3 }}
+        initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+        transition={{ duration: 2, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
       />
       <motion.div
         className="hero-geo hero-geo-3"
         style={{ y: geo3Y }}
-        initial={{ opacity: 0, scale: 0.3 }}
+        initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 1.1 }}
+        transition={{ duration: 2, ease: [0.22, 1, 0.36, 1], delay: 1.2 }}
       />
 
       <div className="container hero-grid">
@@ -64,6 +67,7 @@ export default function Hero() {
           variants={heroContainer}
           initial="hidden"
           animate="visible"
+          style={{ y: contentY, opacity: contentOpacity }}
         >
           <motion.div className="hero-badge" variants={heroChild}>
             {t('hero_badge')}
@@ -80,7 +84,7 @@ export default function Hero() {
             className="hero-credentials"
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+              visible: { transition: { staggerChildren: 0.15, delayChildren: 0.15 } },
             }}
           >
             <motion.span variants={credentialItem}>{t('hero_cred1')}</motion.span>

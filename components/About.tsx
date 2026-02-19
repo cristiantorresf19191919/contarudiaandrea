@@ -7,7 +7,7 @@ import Logo from './Logo';
 
 const listContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
+  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.35 } },
 };
 
 export default function About() {
@@ -29,7 +29,7 @@ export default function About() {
             variants={slideLeft}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: true, margin: '-50px' }}
           >
             <div className="about-image-card">
               <Logo size={140} lColor="#FFFFFF" />
@@ -38,14 +38,14 @@ export default function About() {
             </div>
             <motion.div
               className="about-experience"
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.6, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{
                 type: 'spring',
-                stiffness: 200,
-                damping: 15,
-                delay: 0.5,
+                stiffness: 120,
+                damping: 18,
+                delay: 0.6,
               }}
             >
               <div className="number">15+</div>
@@ -58,7 +58,7 @@ export default function About() {
             variants={slideRight}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: true, margin: '-50px' }}
           >
             <div className="section-tag">{t('about_tag')}</div>
             <h3>{t('about_title')}</h3>
