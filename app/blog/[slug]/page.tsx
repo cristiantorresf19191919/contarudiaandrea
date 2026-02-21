@@ -76,7 +76,7 @@ function PostContent() {
               <div>
                 <div className="blog-author-name">Andrea La Torre</div>
                 <div className="blog-author-role">
-                  {lang === 'es' ? 'Contadora P\u00fablica | Auditora | Oficial SAGRILAFT' : 'CPA | Auditor | SAGRILAFT Officer'}
+                  {lang === 'es' ? 'Contadora Pública | Auditora | Oficial SAGRILAFT y PTEE' : 'CPA | Auditor | SAGRILAFT & PTEE Officer'}
                 </div>
               </div>
             </div>

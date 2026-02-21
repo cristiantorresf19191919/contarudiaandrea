@@ -57,9 +57,9 @@ const jsonLd = {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Contabilidad' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Auditor\u00eda' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Impuestos' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Declaraci\u00f3n de Renta' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SAGRILAFT / PADM' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '\u00c9tica y Transparencia Empresarial' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Declaraci\u00f3n de Renta - Persona Natural' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'SAGRILAFT' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'PTEE - Programa de Transparencia y \u00c9tica Empresarial' } },
     ],
   },
   aggregateRating: {

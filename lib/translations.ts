@@ -12,7 +12,7 @@ export const translations: Record<Lang, Record<string, string>> = {
       'Soluciones contables, tributarias y de cumplimiento que impulsan la confianza y transparencia de su negocio.',
     hero_cred1: 'Contadora P\u00fablica',
     hero_cred2: 'Especialista en Auditor\u00eda y Control',
-    hero_cred3: 'Oficial de Cumplimiento - SAGRILAFT',
+    hero_cred3: 'Oficial de Cumplimiento SAGRILAFT y PTEE',
     hero_cta1: 'Explorar Servicios',
     hero_cta2: 'Contactar',
     stat1_label: 'A\u00f1os de Experiencia',
@@ -32,15 +32,15 @@ export const translations: Record<Lang, Record<string, string>> = {
     svc3_title: 'Impuestos',
     svc3_desc:
       'Planificaci\u00f3n y optimizaci\u00f3n tributaria estrat\u00e9gica, asegurando el cumplimiento fiscal y maximizando los beneficios legales para su empresa.',
-    svc4_title: 'Declaraci\u00f3n de Renta',
+    svc4_title: 'Declaraci\u00f3n de Renta - Persona Natural',
     svc4_desc:
       'Elaboraci\u00f3n y presentaci\u00f3n de declaraciones de renta para personas naturales, optimizando deducciones y asegurando cumplimiento total ante la DIAN.',
-    svc5_title: 'SAGRILAFT / PADM',
+    svc5_title: 'SAGRILAFT',
     svc5_desc:
       'Implementaci\u00f3n y gesti\u00f3n del sistema para la prevenci\u00f3n de lavado de activos, financiaci\u00f3n del terrorismo y financiamiento de la proliferaci\u00f3n de armas de destrucci\u00f3n masiva.',
-    svc6_title: '\u00c9tica y Transparencia Empresarial',
+    svc6_title: 'PTEE - Programa de Transparencia y \u00c9tica Empresarial',
     svc6_desc:
-      'Dise\u00f1o e implementaci\u00f3n de programas de \u00e9tica y transparencia empresarial que fortalecen la gobernanza corporativa y la reputaci\u00f3n de su organizaci\u00f3n.',
+      'Dise\u00f1o e implementaci\u00f3n del PTEE (Programa de Transparencia y \u00c9tica Empresarial) que fortalece la gobernanza corporativa y la reputaci\u00f3n de su organizaci\u00f3n.',
     svc_link: 'Consultar',
     flow_tag: 'Nuestro Proceso',
     flow_title: 'C\u00f3mo Trabajamos',
@@ -95,14 +95,14 @@ export const translations: Record<Lang, Record<string, string>> = {
     flow_exit_fullscreen: 'Salir',
     about_tag: 'Sobre Nosotros',
     about_title: 'Experiencia y Compromiso al Servicio de su Empresa',
-    about_card_subtitle: 'Contadora P\u00fablica | Auditora | Oficial SAGRILAFT',
+    about_card_subtitle: 'Contadora P\u00fablica | Auditora | Oficial SAGRILAFT y PTEE',
     about_exp_label: 'A\u00f1os',
     about_p1:
       'Con m\u00e1s de 15 a\u00f1os de experiencia en contadur\u00eda p\u00fablica, auditor\u00eda y cumplimiento normativo, Andrea La Torre ofrece un servicio personalizado y de alta calidad.',
     about_p2:
       'Especializada en el cumplimiento de regulaciones colombianas, incluyendo SAGRILAFT y programas de transparencia, garantizamos que su empresa opere con los m\u00e1s altos est\u00e1ndares.',
     about_li1: 'Contadora P\u00fablica titulada con especializaci\u00f3n en Auditor\u00eda y Control',
-    about_li2: 'Oficial de Cumplimiento SAGRILAFT certificada',
+    about_li2: 'Oficial de Cumplimiento SAGRILAFT y PTEE certificada',
     about_li3: 'Experta en normatividad tributaria colombiana',
     about_li4: 'Compromiso con la \u00e9tica y transparencia empresarial',
     why_tag: 'Por Qu\u00e9 Elegirnos',
@@ -136,9 +136,9 @@ export const translations: Record<Lang, Record<string, string>> = {
     form_opt1: 'Contabilidad',
     form_opt2: 'Auditor\u00eda',
     form_opt3: 'Impuestos',
-    form_opt4: 'Declaraci\u00f3n de Renta',
-    form_opt5: 'SAGRILAFT / PADM',
-    form_opt6: '\u00c9tica y Transparencia',
+    form_opt4: 'Declaraci\u00f3n de Renta - Persona Natural',
+    form_opt5: 'SAGRILAFT',
+    form_opt6: 'PTEE - Programa de Transparencia y \u00c9tica Empresarial',
     form_message: 'Mensaje',
     form_submit: 'Enviar por WhatsApp',
     footer_desc:
@@ -191,7 +191,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     cta_guarantee: 'Confidencialidad garantizada',
     // Trust badges
     trust_cpa: 'Contadora P\u00fablica Certificada',
-    trust_sagrilaft: 'Oficial SAGRILAFT',
+    trust_sagrilaft: 'Oficial SAGRILAFT y PTEE',
     trust_dian: 'Registro DIAN Activo',
     trust_experience: '15+ A\u00f1os de Experiencia',
   },
@@ -206,7 +206,7 @@ export const translations: Record<Lang, Record<string, string>> = {
       'Accounting, tax, and compliance solutions that build trust and transparency for your business.',
     hero_cred1: 'Certified Public Accountant',
     hero_cred2: 'Audit & Control Specialist',
-    hero_cred3: 'Compliance Officer - SAGRILAFT',
+    hero_cred3: 'SAGRILAFT & PTEE Compliance Officer',
     hero_cta1: 'Explore Services',
     hero_cta2: 'Get in Touch',
     stat1_label: 'Years of Experience',
@@ -226,15 +226,15 @@ export const translations: Record<Lang, Record<string, string>> = {
     svc3_title: 'Tax Services',
     svc3_desc:
       'Strategic tax planning and optimization, ensuring fiscal compliance while maximizing legal benefits for your business.',
-    svc4_title: 'Income Tax Filing',
+    svc4_title: 'Income Tax Filing - Natural Person',
     svc4_desc:
       'Preparation and filing of personal income tax returns, optimizing deductions and ensuring full compliance with DIAN regulations.',
     svc5_title: 'AML / CFT Compliance',
     svc5_desc:
       'Implementation and management of systems for the prevention of money laundering, terrorism financing, and proliferation of weapons of mass destruction financing.',
-    svc6_title: 'Corporate Ethics & Transparency',
+    svc6_title: 'PTEE - Business Transparency and Ethics Program',
     svc6_desc:
-      'Design and implementation of corporate ethics and transparency programs that strengthen governance and your organization\u2019s reputation.',
+      'Design and implementation of the PTEE (Business Transparency and Ethics Program) to strengthen corporate governance and your organization\u2019s reputation.',
     svc_link: 'Learn More',
     flow_tag: 'Our Process',
     flow_title: 'How We Work',
@@ -287,14 +287,14 @@ export const translations: Record<Lang, Record<string, string>> = {
     flow_exit_fullscreen: 'Exit',
     about_tag: 'About Us',
     about_title: 'Experience and Commitment at Your Service',
-    about_card_subtitle: 'Public Accountant | Auditor | SAGRILAFT Officer',
+    about_card_subtitle: 'Public Accountant | Auditor | SAGRILAFT & PTEE Officer',
     about_exp_label: 'Years',
     about_p1:
       'With over 15 years of experience in public accounting, auditing, and regulatory compliance, Andrea La Torre offers a personalized, high-quality service.',
     about_p2:
       'Specialized in Colombian regulatory compliance, including SAGRILAFT and transparency programs, we ensure your company operates at the highest standards.',
     about_li1: 'Certified Public Accountant with specialization in Audit & Control',
-    about_li2: 'Certified SAGRILAFT Compliance Officer',
+    about_li2: 'Certified SAGRILAFT & PTEE Compliance Officer',
     about_li3: 'Expert in Colombian tax regulations',
     about_li4: 'Committed to corporate ethics and transparency',
     why_tag: 'Why Choose Us',
@@ -328,9 +328,9 @@ export const translations: Record<Lang, Record<string, string>> = {
     form_opt1: 'Accounting',
     form_opt2: 'Auditing',
     form_opt3: 'Tax Services',
-    form_opt4: 'Income Tax Filing',
+    form_opt4: 'Income Tax Filing - Natural Person',
     form_opt5: 'AML / CFT Compliance',
-    form_opt6: 'Corporate Ethics & Transparency',
+    form_opt6: 'PTEE - Business Transparency and Ethics Program',
     form_message: 'Message',
     form_submit: 'Send via WhatsApp',
     footer_desc:
@@ -383,7 +383,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     cta_guarantee: 'Confidentiality guaranteed',
     // Trust badges
     trust_cpa: 'Certified Public Accountant',
-    trust_sagrilaft: 'SAGRILAFT Officer',
+    trust_sagrilaft: 'SAGRILAFT & PTEE Officer',
     trust_dian: 'Active DIAN Registration',
     trust_experience: '15+ Years of Experience',
   },

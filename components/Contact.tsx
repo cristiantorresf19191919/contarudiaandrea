@@ -41,9 +41,9 @@ export default function Contact() {
     { value: 'Contabilidad', label: t('form_opt1') },
     { value: 'Auditor\u00eda', label: t('form_opt2') },
     { value: 'Impuestos', label: t('form_opt3') },
-    { value: 'Declaraci\u00f3n de Renta', label: t('form_opt4') },
+    { value: 'Declaraci\u00f3n de Renta - Persona Natural', label: t('form_opt4') },
     { value: 'SAGRILAFT', label: t('form_opt5') },
-    { value: '\u00c9tica y Transparencia', label: t('form_opt6') },
+    { value: 'PTEE - Programa de Transparencia y \u00c9tica Empresarial', label: t('form_opt6') },
   ];
 
   return (
