@@ -5,6 +5,7 @@ import { FormEvent, useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { slideLeft, slideRight, slideInItem, fadeUp } from '@/lib/animations';
 import SectionHeader from './SectionHeader';
+import Avatar from './Avatar';
 
 const contactItemContainer = {
   hidden: {},
@@ -62,8 +63,27 @@ export default function Contact() {
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
           >
+            <motion.div
+              className="contact-card"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Avatar size="md" showStatus statusLabel={t('hero_availability') as string} className="contact-card-avatar" />
+              <div className="contact-card-body">
+                <div className="contact-card-name">Andrea La Torre</div>
+                <div className="contact-card-title">{t('hero_cred1')}</div>
+                <div className="contact-card-quote">
+                  <svg className="contact-card-quote-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M9.5 6c-3 0-5.5 2.5-5.5 5.5V18h6v-6.5H6.5C6.5 9 7.5 8 9.5 8V6zm9 0c-3 0-5.5 2.5-5.5 5.5V18h6v-6.5h-3.5c0-2.5 1-3.5 3-3.5V6z" />
+                  </svg>
+                  <span>{t('contact_info_desc')}</span>
+                </div>
+              </div>
+            </motion.div>
+
             <h3>{t('contact_info_title')}</h3>
-            <p>{t('contact_info_desc')}</p>
             <motion.div
               className="contact-details"
               variants={contactItemContainer}

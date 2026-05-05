@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import { heroChild, heroVisual } from '@/lib/animations';
-import Logo from './Logo';
 
 const heroContainer = {
   hidden: {},
@@ -131,13 +130,54 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
         >
-          <div className="hero-logo-wrapper">
-            <div className="hero-logo-ring" />
-            <div className="hero-logo-ring" />
-            <div className="hero-logo-ring" />
-            <div className="hero-logo-center">
-              <Logo size={120} lColor="#FFFFFF" />
+          <div className="hero-portrait-wrapper">
+            <div className="hero-portrait-glow" aria-hidden="true" />
+            <div className="hero-portrait-ring hero-portrait-ring-1" aria-hidden="true" />
+            <div className="hero-portrait-ring hero-portrait-ring-2" aria-hidden="true" />
+            <div className="hero-portrait-frame">
+              <img
+                src="/images/andrea-hero.jpeg"
+                alt="Andrea La Torre - Contadora Pública en su oficina"
+                className="hero-portrait-img"
+                loading="eager"
+                fetchPriority="high"
+              />
+              <div className="hero-portrait-overlay" aria-hidden="true" />
             </div>
+
+            {/* Floating credential badge */}
+            <motion.div
+              className="hero-portrait-badge"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 1.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="hero-portrait-badge-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+                  <path d="M9 12l2 2 4-4" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+              </span>
+              <span className="hero-portrait-badge-text">
+                <span className="hero-portrait-badge-title">{t('hero_cred1')}</span>
+                <span className="hero-portrait-badge-sub">T.P. — DIAN</span>
+              </span>
+            </motion.div>
+
+            {/* Floating availability pill */}
+            <motion.div
+              className="hero-portrait-pill"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="hero-portrait-pill-dot" />
+              <span>{t('hero_availability')}</span>
+            </motion.div>
+
+            {/* Signature corner accents */}
+            <span className="hero-portrait-corner hero-portrait-corner-tl" aria-hidden="true" />
+            <span className="hero-portrait-corner hero-portrait-corner-br" aria-hidden="true" />
           </div>
         </motion.div>
       </div>

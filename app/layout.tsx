@@ -26,6 +26,20 @@ export const metadata: Metadata = {
     description: 'Servicios contables, tributarios y de cumplimiento que impulsan la confianza y transparencia de su negocio. 15+ a\u00f1os de experiencia.',
     type: 'website',
     locale: 'es_CO',
+    images: [
+      {
+        url: '/images/andrea-portrait.jpeg',
+        width: 1024,
+        height: 1668,
+        alt: 'Andrea La Torre - Contadora P\u00fablica',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Andrea La Torre | Contadora P\u00fablica Certificada',
+    description: 'Servicios contables, tributarios y de cumplimiento. 15+ a\u00f1os de experiencia.',
+    images: ['/images/andrea-portrait.jpeg'],
   },
   robots: {
     index: true,
@@ -78,6 +92,12 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${montserrat.variable} ${playfair.variable}`}>
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/andrea-hero.jpeg"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

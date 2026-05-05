@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/LanguageContext';
-import Logo from './Logo';
+import Avatar from './Avatar';
 
 export default function Navbar() {
   const { lang, setLang, t } = useLanguage();
@@ -31,8 +31,11 @@ export default function Navbar() {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <a href="#" className="nav-logo">
-          <Logo size={48} lColor={scrolled ? '#2D2D2D' : '#FFFFFF'} />
-          Andrea La Torre
+          <Avatar size="sm" showStatus statusLabel={t('hero_availability') as string} className="nav-avatar" />
+          <span className="nav-logo-text">
+            <span className="nav-logo-name">Andrea La Torre</span>
+            <span className="nav-logo-tag">Contadora Pública</span>
+          </span>
         </a>
 
         {/* Desktop links */}
